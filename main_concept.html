@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시안 01. 클래식 센터 (v3) - RESET 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&family=Bebas+Neue&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #fff8f5;
+            color: #1a1a1a;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* ─── 색상 변수 ─── */
+        :root {
+            --coral:   #FF5C5C;
+            --orange:  #FF8C42;
+            --yellow:  #FFD166;
+            --pink:    #FF6B9D;
+            --cream:   #FFF5ED;
+            --dark:    #1A1A2E;
+        }
+
+        /* ─── 영문 디스플레이 폰트 ─── */
+        .font-display { font-family: 'Bebas Neue', sans-serif; }
+        .font-heading  { font-family: 'Oswald', sans-serif; }
+
+        /* ─── 히어로 그라디언트 ─── */
+        .hero-gradient {
+            background: linear-gradient(145deg, #FF5C5C 0%, #FF8C42 45%, #FFD166 100%);
+        }
+
+        /* ─── 버튼 ─── */
+        .btn-primary {
+            background: #1A1A2E;
+            color: #fff;
+            padding: 14px 36px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-block;
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(26,26,46,0.25); }
+
+        .btn-outline {
+            background: transparent;
+            color: #1A1A2E;
+            border: 2.5px solid #1A1A2E;
+            padding: 12px 34px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            transition: all 0.2s;
+            display: inline-block;
+        }
+        .btn-outline:hover { background: #1A1A2E; color: #fff; }
+
+        .btn-white {
+            background: #fff;
+            color: var(--coral);
+            padding: 16px 44px;
+            border-radius: 999px;
+            font-weight: 900;
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-block;
+        }
+        .btn-white:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,0.2); }
+
+        /* ─── 네비게이션 ─── */
+        .nav-glass {
+            background: #ffffff;
+            border-bottom: 1px solid rgba(255,92,92,0.12);
+        }
+
+        /* ─── 플로팅 뱃지 ─── */
+        .badge {
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(6px);
+            border: 1.5px solid rgba(255,255,255,0.5);
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            padding: 6px 16px;
+            border-radius: 999px;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+
+        /* ─── 장식 원 ─── */
+        .deco-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.12);
+        }
+
+        /* ─── 섹션 구분 곡선 ─── */
+        .wave-top {
+            margin-top: -2px;
+            display: block;
+            line-height: 0;
+        }
+
+        /* ─── 카드 ─── */
+        .card-hover {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 24px 48px rgba(255,92,92,0.15);
+        }
+
+        /* ─── 타임라인 아이템 ─── */
+        .timeline-item { border-left: 3px solid #FFD166; padding-left: 20px; }
+
+        /* ─── 플레이스홀더 이미지 영역 ─── */
+        .img-placeholder {
+            background: linear-gradient(135deg, #ffe8e0 0%, #ffd6c8 100%);
+            border: 2px dashed rgba(255,92,92,0.25);
+            display: flex; align-items: center; justify-content: center;
+            color: #FF8C42; font-size: 0.8rem; font-weight: 600;
+        }
+
+        /* ─── 강조 태그 ─── */
+        .tag {
+            background: var(--yellow);
+            color: #1A1A2E;
+            font-size: 0.7rem;
+            font-weight: 900;
+            padding: 4px 12px;
+            border-radius: 4px;
+            display: inline-block;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        /* ─── 애니메이션 ─── */
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(2deg); }
+            50% { transform: translateY(-20px) rotate(3deg); }
+            100% { transform: translateY(0px) rotate(2deg); }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* ─── 도시 실루엣 SVG ─── */
+        .city-silhouette { fill: rgba(26,26,46,0.12); }
+
+        /* ─── 섹션 제목 스타일 ─── */
+        .section-eyebrow {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--coral);
+        }
+
+        /* ─── 키트 그리드 ─── */
+        .kit-card { border-radius: 24px; overflow: hidden; }
+
+        /* ─── CTA 섹션 ─── */
+        .cta-gradient {
+            background: linear-gradient(135deg, #FF5C5C 0%, #FF8C42 60%, #FFD166 100%);
+        }
+
+        /* ─── 모바일 메뉴 ─── */
+        .mobile-menu {
+            position: fixed;
+            top: 68px;
+            left: 0; right: 0;
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255,92,92,0.12);
+            z-index: 49;
+            transform: translateY(-110%);
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 0 24px 24px;
+        }
+        .mobile-menu.open { transform: translateY(0); }
+        .mobile-menu a {
+            display: flex;
+            align-items: center;
+            padding: 16px 0;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #374151;
+            border-bottom: 1px solid rgba(255,92,92,0.08);
+            text-decoration: none;
+            gap: 12px;
+            transition: color 0.2s;
+        }
+        .mobile-menu a:last-child { border-bottom: none; }
+        .mobile-menu a:hover { color: var(--coral); }
+        .mobile-menu a .menu-icon {
+            width: 32px; height: 32px;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+        .hamburger { cursor: pointer; display: flex; flex-direction: column; gap: 5px; padding: 4px; }
+        .hamburger span {
+            display: block; width: 22px; height: 2.5px;
+            background: #1A1A2E; border-radius: 99px;
+            transition: transform 0.3s, opacity 0.3s;
+            transform-origin: center;
+        }
+        .hamburger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+        /* ─── 비디오 슬라이드 ─── */
+        .video-section { background: #1A1A2E; }
+
+        .video-slider-wrap {
+            width: 100%;
+            overflow: hidden;
+            border-radius: 16px;
+            position: relative;
+        }
+        .video-slider-track {
+            display: flex;
+            width: 100%;
+            transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+        .video-slide {
+            flex: 0 0 100%;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        .video-slide iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            display: block;
+            border: none;
+        }
+        .video-placeholder {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, #2d2d4e 0%, #1a1a2e 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.45);
+            font-size: 0.85rem;
+            font-weight: 600;
+            gap: 14px;
+            box-sizing: border-box;
+        }
+        .play-btn {
+            width: 64px; height: 64px;
+            border-radius: 50%;
+            background: rgba(255,92,92,0.85);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+
+        /* 이전/다음 버튼은 슬라이더 wrap 외부 절대위치로 */
+        .slider-area {
+            position: relative;
+        }
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(8px);
+            border: 1.5px solid rgba(255,255,255,0.18);
+            color: #fff;
+            font-size: 1.2rem;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s;
+            z-index: 10;
+            user-select: none;
+        }
+        .slider-btn:hover { background: rgba(255,92,92,0.75); }
+        .slider-btn.prev { left: -20px; }
+        .slider-btn.next { right: -20px; }
+
+        .slider-dots {
+            display: flex; justify-content: center; gap: 8px; margin-top: 18px;
+        }
+        .dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.25);
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .dot.active { background: var(--coral); transform: scale(1.3); }
+
+        /* ─── 탭 스타일 ─── */
+        .day-tab {
+            padding: 10px 24px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: #9ca3af;
+            background: rgba(0,0,0,0.04);
+            transition: all 0.2s;
+        }
+        .day-tab.active {
+            background: #1A1A2E;
+            color: #fff;
+            box-shadow: 0 10px 20px rgba(26,26,46,0.15);
+        }
+        .day-content.hidden { display: none; }
+
+        .video-thumb-row {
+            display: flex; gap: 12px; margin-top: 20px;
+            overflow-x: auto; padding-bottom: 4px;
+            scrollbar-width: none;
+        }
+        .video-thumb-row::-webkit-scrollbar { display: none; }
+        .video-thumb {
+            flex-shrink: 0;
+            width: 140px;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2.5px solid transparent;
+            transition: border-color 0.2s, opacity 0.2s;
+            opacity: 0.5;
+        }
+        .video-thumb.active { border-color: var(--coral); opacity: 1; }
+        .video-thumb-inner {
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, #2d2d4e, #3d2d3e);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.5);
+        }
+        .video-thumb-label {
+            background: #111;
+            padding: 6px 8px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.6);
+            letter-spacing: 0.05em;
+        }
+
+        /* 모바일 */
+        @media (max-width: 640px) {
+            .video-thumb-row { display: none; }
+            /* 로고 크기 축소 */
+            .nav-logo { height: 28px !important; }
+            /* 슬라이더 버튼을 영상 아래로 이동 */
+            .slider-area { padding-bottom: 56px; }
+            .slider-btn {
+                width: 40px; height: 40px; font-size: 0.95rem;
+                top: auto; bottom: 0;
+                transform: none;
+            }
+            .slider-btn.prev { left: calc(50% - 52px); }
+            .slider-btn.next { right: calc(50% - 52px); left: auto; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ─────────────────────────────────────────
+     NAV
+───────────────────────────────────────── -->
+<nav class="fixed top-0 w-full z-50 nav-glass">
+    <div class="max-w-screen-xl mx-auto px-6 flex items-center justify-between" style="height:68px;">
+        <a href="#" class="flex items-center">
+            <img src="청년부 로고.jpeg" alt="FLY Worship Camp" class="nav-logo" style="height:44px; width:auto; object-fit:contain;">
+        </a>
+        <!-- 데스크탑 메뉴 -->
+        <div class="hidden md:flex space-x-9 text-sm font-bold text-gray-500">
+            <a href="#info"     class="hover:text-red-500 transition-colors">Information</a>
+            <a href="#schedule" class="hover:text-red-500 transition-colors">Schedule</a>
+            <a href="#kit"      class="hover:text-red-500 transition-colors">굿즈</a>
+            <a href="#media"    class="hover:text-red-500 transition-colors">Media</a>
+            <a href="#announcements" class="hover:text-red-500 transition-colors">공지</a>
+            <a href="#faq"          class="hover:text-red-500 transition-colors">FAQ</a>
+        </div>
+        <!-- 데스크탑 CTA -->
+        <a href="#cta" class="hidden md:inline-block btn-primary text-xs">RESET 시작하기 →</a>
+        <!-- 모바일 햄버거 -->
+        <button id="hamburger" class="hamburger md:hidden" aria-label="메뉴 열기">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- 모바일 드롭다운 메뉴 -->
+<div id="mobileMenu" class="mobile-menu md:hidden">
+    <a href="#info" class="menu-link">
+        <span class="menu-icon" style="background:linear-gradient(135deg,#FF5C5C,#FF8C42);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="14" y2="15"/></svg></span>
+        Information
+    </a>
+    <a href="#schedule" class="menu-link">
+        <span class="menu-icon" style="background:linear-gradient(135deg,#FF8C42,#FFD166);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+        Schedule
+    </a>
+    <a href="#kit" class="menu-link">
+        <span class="menu-icon" style="background:linear-gradient(135deg,#FF6B9D,#FF5C5C);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></span>
+        굿즈
+    </a>
+    <a href="#media" class="menu-link">
+        <span class="menu-icon" style="background:linear-gradient(135deg,#1A1A2E,#FF5C5C);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7" fill="white"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></span>
+        Media
+    </a>
+    <a href="#announcements" class="menu-link">
+        <span class="menu-icon" style="background:linear-gradient(135deg,#FFD166,#FF8C42);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12a2 2 0 0 1 2-2h2l7-4v12l-7-4H4a2 2 0 0 1-2-2z"/><path d="M18 8a5 5 0 0 1 0 8"/></svg></span>
+        공지사항
+    </a>
+    <a href="#faq" class="menu-link">
+        <span class="menu-icon" style="background:linear-gradient(135deg,#FF8C42,#FF5C5C);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r="1" fill="white" stroke="none"/></svg></span>
+        FAQ
+    </a>
+    <a href="#cta" class="menu-link" style="color:var(--coral);">
+        <span class="menu-icon" style="background:linear-gradient(135deg,#FF5C5C,#FF8C42);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+        RESET 시작하기
+    </a>
+</div>
+
+
+<!-- ─────────────────────────────────────────
+     HERO
+───────────────────────────────────────── -->
+<section class="hero-gradient relative overflow-hidden pt-20" style="min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end;">
+
+    <!-- 장식 원들 -->
+    <div class="deco-circle" style="width:520px;height:520px;top:-120px;right:-140px;"></div>
+    <div class="deco-circle" style="width:280px;height:280px;bottom:200px;left:-80px;"></div>
+    <div class="deco-circle" style="width:140px;height:140px;top:200px;left:300px;"></div>
+
+    <!-- 콘텐츠 -->
+    <div class="relative z-10 max-w-screen-xl mx-auto px-6 py-24 md:py-32 w-full">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <!-- 왼쪽: 텍스트 정보 -->
+            <div class="max-w-3xl">
+                <span class="badge mb-6">2026 FLY worship camp</span>
+
+                <!-- 메인 타이틀 -->
+                <h1 class="font-display text-white leading-none mb-4" style="font-size: clamp(60px, 10vw, 130px); letter-spacing:0.01em; text-shadow: 0 4px 24px rgba(0,0,0,0.15);">
+                    RESET
+                </h1>
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="h-1 bg-white opacity-60 flex-1 max-w-[60px] rounded"></div>
+                    <p class="text-white font-bold text-xl md:text-2xl" style="font-family:'Oswald',sans-serif; letter-spacing:0.1em;">2026</p>
+                </div>
+                <p class="text-white/85 text-lg md:text-xl leading-relaxed mb-10 max-w-xl font-medium">
+                    모든 것이 다시 시작되는 순간,<br>
+                    나의 우선순위를 내려놓고 하나님께 돌아가는 2박 3일.
+                </p>
+
+                <!-- 기본 정보 칩 -->
+                <div class="flex flex-wrap gap-3">
+                    <span class="badge" style="font-size:0.75rem;display:inline-flex;align-items:center;gap:5px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>2026.07.03 – 07.05</span>
+                    <span class="badge" style="font-size:0.75rem;display:inline-flex;align-items:center;gap:5px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>경기도 평택</span>
+                    <span class="badge" style="font-size:0.75rem;display:inline-flex;align-items:center;gap:5px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>청년부 수련회</span>
+                </div>
+
+                <!-- 모바일 전용 포스터 -->
+                <div class="md:hidden mt-10 flex justify-center">
+                    <div class="w-full max-w-[280px] shadow-2xl relative overflow-hidden" style="transform: rotate(2deg);">
+                        <img src="작년포스터.jpeg" alt="작년 수련회 포스터" class="w-full h-auto block">
+                        <div class="absolute top-4 left-4 tag">RESET 2026</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 오른쪽: 세로형 포스터 플레이스홀더 -->
+            <div class="hidden md:flex justify-end">
+                <div class="w-full max-w-[400px] shadow-2xl relative overflow-hidden animate-float" style="transform: rotate(2deg);">
+                    <img src="작년포스터.jpeg" alt="작년 수련회 포스터" class="w-full h-auto block">
+                    <!-- 코너 장식 -->
+                    <div class="absolute top-4 left-4 tag">RESET 2026</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 도시 실루엣 (솔로런 레퍼런스) -->
+    <div class="relative z-10 w-full" style="margin-bottom:-2px;">
+        <svg viewBox="0 0 1440 160" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;display:block;">
+            <!-- 건물 실루엣 -->
+            <path class="city-silhouette" d="
+                M0,160 L0,100 L30,100 L30,80 L50,80 L50,60 L70,60 L70,80 L90,80 L90,100
+                L120,100 L120,50 L140,50 L140,30 L160,30 L160,50 L180,50 L180,100
+                L200,100 L200,70 L210,70 L210,55 L220,55 L220,40 L230,40 L230,55 L240,55 L240,70 L250,70 L250,100
+                L270,100 L270,80 L290,80 L290,60 L300,60 L300,45 L310,45 L310,35 L320,35 L320,45 L330,45 L330,60 L340,60 L340,80 L360,80 L360,100
+                L380,100 L380,65 L395,65 L395,50 L405,50 L405,35 L415,35 L415,20 L425,20 L425,35 L435,35 L435,50 L445,50 L445,65 L460,65 L460,100
+                L480,100 L480,85 L500,85 L500,100
+                L520,100 L520,55 L535,55 L535,42 L545,42 L545,30 L555,30 L555,42 L565,42 L565,55 L580,55 L580,100
+                L600,100 L600,75 L620,75 L620,55 L630,55 L630,40 L640,40 L640,55 L650,55 L650,75 L670,75 L670,100
+                L690,100 L690,80 L710,80 L710,100
+                L730,100 L730,45 L745,45 L745,28 L755,28 L755,15 L765,15 L765,28 L775,28 L775,45 L790,45 L790,100
+                L810,100 L810,70 L825,70 L825,55 L840,55 L840,70 L855,70 L855,100
+                L875,100 L875,85 L895,85 L895,65 L905,65 L905,50 L915,50 L915,65 L925,65 L925,85 L945,85 L945,100
+                L960,100 L960,75 L975,75 L975,55 L985,55 L985,40 L995,40 L995,55 L1005,55 L1005,75 L1020,75 L1020,100
+                L1040,100 L1040,85 L1060,85 L1060,100
+                L1080,100 L1080,50 L1095,50 L1095,35 L1105,35 L1105,20 L1115,20 L1115,35 L1125,35 L1125,50 L1140,50 L1140,100
+                L1160,100 L1160,70 L1175,70 L1175,55 L1190,55 L1190,70 L1205,70 L1205,100
+                L1220,100 L1220,80 L1240,80 L1240,60 L1250,60 L1250,45 L1260,45 L1260,60 L1270,60 L1270,80 L1290,80 L1290,100
+                L1310,100 L1310,75 L1330,75 L1330,55 L1340,55 L1340,40 L1350,40 L1350,55 L1360,55 L1360,75 L1380,75 L1380,100
+                L1440,100 L1440,160 Z
+            " />
+            <!-- 흰 배경 전환 -->
+            <path fill="#fff8f5" d="M0,140 Q360,115 720,130 Q1080,145 1440,120 L1440,160 L0,160 Z"/>
+        </svg>
+    </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────
+     INFORMATION & LOCATION
+───────────────────────────────────────── -->
+<section id="info" class="py-24" style="background: var(--cream);">
+    <div class="max-w-screen-xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+
+            <div>
+                <p class="section-eyebrow mb-3">About the Camp</p>
+                <h2 class="font-heading text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight" style="word-break:keep-all;">
+                    우선순위를 분명히 하는<br>
+                    <span style="color:var(--coral);">청년회</span>
+                </h2>
+                <p class="text-gray-600 text-lg leading-relaxed mb-10">
+                    "그런즉 너희는 먼저 그의 나라와 그의 의를 구하라<br>
+                    그리하면 이 모든 것을 너희에게 더하시리라" (마태복음 6:33)
+                </p>
+
+                <div class="space-y-5">
+                    <!-- 일시 -->
+                    <div class="flex items-start gap-4 p-5 bg-white rounded-2xl shadow-sm">
+                        <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background:#F28B6E;">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 mb-1">일시</h4>
+                            <p class="text-sm text-gray-500">2026년 7월 3일(금) ~ 5일(일), 2박 3일</p>
+                        </div>
+                    </div>
+                    <!-- 장소 -->
+                    <div class="flex items-start gap-4 p-5 bg-white rounded-2xl shadow-sm">
+                        <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background:#F5A85C;">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 mb-1">장소</h4>
+                            <p class="text-sm text-gray-500">경기도 평택시 진위로 181-94</p>
+                        </div>
+                    </div>
+                    <!-- 대상 -->
+                    <div class="flex items-start gap-4 p-5 bg-white rounded-2xl shadow-sm">
+                        <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background:#E8829A;">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 mb-1">대상</h4>
+                            <p class="text-sm text-gray-500">청년부 전체</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 지도/이미지 -->
+            <div class="img-placeholder aspect-square rounded-3xl" style="min-height:360px;">
+                Location / Map Image
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────
+     SCHEDULE
+───────────────────────────────────────── -->
+<section id="schedule" class="py-24" style="background:#fff8f5;">
+    <div class="max-w-screen-xl mx-auto px-6">
+
+        <div class="text-center mb-12">
+            <p class="section-eyebrow mb-3">Program Timeline</p>
+            <h2 class="font-heading text-4xl md:text-5xl font-bold text-gray-900">
+                타임라인
+            </h2>
+            <p class="text-gray-400 mt-3">2박 3일간의 집중적인 회복의 시간</p>
+        </div>
+
+        <!-- Day Tabs -->
+        <div class="flex justify-center gap-3 mb-10">
+            <button class="day-tab active" onclick="showDay(1)">Day 01</button>
+            <button class="day-tab" onclick="showDay(2)">Day 02</button>
+            <button class="day-tab" onclick="showDay(3)">Day 03</button>
+        </div>
+
+        <div class="max-w-2xl mx-auto">
+            <!-- Day 1 Content -->
+            <div id="day1" class="day-content">
+                <div class="bg-white rounded-3xl overflow-hidden shadow-xl border border-orange-50">
+                    <div class="px-8 py-6" style="background:linear-gradient(135deg,#FF5C5C,#FF8C42);">
+                        <h4 class="font-display text-white text-3xl">Day 01</h4>
+                    </div>
+                    <div class="p-8">
+                        <ul class="space-y-6 text-base text-gray-500">
+                            <li class="timeline-item"><span class="text-sm font-black text-gray-800">20:00</span><br>본대 집결</li>
+                            <li class="timeline-item"><span class="text-sm font-black text-gray-800">20:30</span><br>본대 이동 (평택 수양관)</li>
+                            <li class="timeline-item"><span class="text-sm font-black text-gray-800">22:00</span><br>개회예배</li>
+                            <li class="timeline-item"><span class="text-sm font-black text-gray-800">22:30</span><br>찬양집회 (70')</li>
+                            <li class="timeline-item"><span class="text-sm font-black text-gray-800">23:40</span><br>점호 및 취침</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 2 Content -->
+            <div id="day2" class="day-content hidden">
+                <div class="bg-white rounded-3xl overflow-hidden shadow-xl border border-orange-50">
+                    <div class="px-8 py-6" style="background:linear-gradient(135deg,#FF8C42,#FFD166);">
+                        <h4 class="font-display text-white text-3xl">Day 02</h4>
+                    </div>
+                    <div class="p-8">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+                            <ul class="space-y-6 text-base text-gray-500">
+                                <li class="timeline-item"><span class="text-sm font-black text-gray-800">06:30</span><br>기상 및 세면</li>
+                                <li class="timeline-item"><span class="text-sm font-black text-gray-800">07:00</span><br>새벽 QT</li>
+                                <li class="timeline-item"><span class="text-sm font-black text-gray-800">07:40</span><br>아침식사</li>
+                                <li class="timeline-item"><span class="text-sm font-black text-gray-800">08:40</span><br>시작 찬양</li>
+                                <li class="timeline-item"><span class="text-sm font-black text-gray-800">09:00</span><br>YES, U 1 (180')<br><span class="text-xs opacity-70">- 조별토론 및 태그라인 만들기</span></li>
+                                <li class="timeline-item"><span class="text-sm font-black text-gray-800">12:00</span><br>점심식사</li>
+                                <li class="timeline-item"><span class="text-sm font-black text-gray-800">13:00</span><br>개인정비 (30')</li>
+                            </ul>
+                            <ul class="space-y-6 text-base text-gray-500">
+                                <li class="timeline-item"><span class="text-sm font-black text-gray-800">13:30</span><br>활동프로그램 (210')<br><span class="text-xs opacity-70">- 빙고판을 활용한 미니게임천국</span></li>
+                                <li class="timeline-item"><span class="text-sm font-black text-gray-800">17:00</span><br>개인정비 (60')</li>
+                                <li class="timeline-item"><span class="text-sm font-black text-gray-800">18:00</span><br>저녁식사</li>
+                                <li class="timeline-item"><span class="text-sm font-black text-gray-800">19:30</span><br>찬양 (30')</li>
+                                <li class="timeline-item"><span class="text-sm font-black text-gray-800">20:00</span><br>청년부 부흥회 (60')</li>
+                                <li class="timeline-item"><span class="text-sm font-black text-gray-800">21:00</span><br>전기통닭, 삼겹살 파티</li>
+                                <li class="timeline-item"><span class="text-sm font-black text-gray-800">23:00</span><br>점호 및 취침</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 3 Content -->
+            <div id="day3" class="day-content hidden">
+                <div class="bg-white rounded-3xl overflow-hidden shadow-xl border border-orange-50">
+                    <div class="px-8 py-6" style="background:linear-gradient(135deg,#FF6B9D,#FF8C42);">
+                        <h4 class="font-display text-white text-3xl">Day 03</h4>
+                    </div>
+                    <div class="p-8">
+                        <ul class="space-y-6 text-base text-gray-500">
+                            <li class="timeline-item"><span class="text-sm font-black text-gray-800">06:30</span><br>기상 및 세면 / 새벽 QT</li>
+                            <li class="timeline-item"><span class="text-sm font-black text-gray-800">07:40</span><br>아침식사 / 시작 찬양</li>
+                            <li class="timeline-item"><span class="text-sm font-black text-gray-800">09:00</span><br>YES, U 2 (180')<br><span class="text-xs opacity-70">- 조별토론 및 기여카드 만들기</span></li>
+                            <li class="timeline-item"><span class="text-sm font-black text-gray-800">12:00</span><br>점심식사</li>
+                            <li class="timeline-item"><span class="text-sm font-black text-gray-800">13:00</span><br>YES, U 3 (150') - 그룹별 모임</li>
+                            <li class="timeline-item"><span class="text-sm font-black text-gray-800">15:30</span><br>주일 5부 예배</li>
+                            <li class="timeline-item"><span class="text-sm font-black text-gray-800">17:00</span><br>마무리 및 저녁식사</li>
+                            <li class="timeline-item"><span class="text-sm font-black text-gray-800">18:30</span><br>귀가 해산</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────
+     WELCOME KIT
+───────────────────────────────────────── -->
+<section id="kit" class="py-24" style="background:var(--cream);">
+    <div class="max-w-screen-xl mx-auto px-6">
+
+        <div class="flex flex-col md:flex-row justify-between items-end mb-14 gap-6">
+            <div>
+                <p class="section-eyebrow mb-3">Participant Gift</p>
+                <h2 class="font-heading text-4xl md:text-5xl font-bold text-gray-900">
+                    2026 플캠 굿즈
+                </h2>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+            <div class="card-hover">
+                <div class="img-placeholder kit-card aspect-[4/5] mb-4 relative">
+                    <span class="text-xs">T-shirt</span>
+                    <div class="absolute bottom-3 left-3 tag">Cotton</div>
+                </div>
+                <h4 class="font-bold text-gray-900 mb-1">티셔츠</h4>
+                <p class="text-xs text-gray-400">오가닉 코튼의 편안한 데일리룩</p>
+            </div>
+            <div class="card-hover">
+                <div class="img-placeholder kit-card aspect-[4/5] mb-4 relative">
+                    <span class="text-xs">Goods 1</span>
+                    <div class="absolute bottom-3 left-3 tag">New</div>
+                </div>
+                <h4 class="font-bold text-gray-900 mb-1">굿즈 1</h4>
+                <p class="text-xs text-gray-400">준비 중인 굿즈입니다</p>
+            </div>
+            <div class="card-hover">
+                <div class="img-placeholder kit-card aspect-[4/5] mb-4 relative">
+                    <span class="text-xs">Goods 2</span>
+                    <div class="absolute bottom-3 left-3 tag">New</div>
+                </div>
+                <h4 class="font-bold text-gray-900 mb-1">굿즈 2</h4>
+                <p class="text-xs text-gray-400">준비 중인 굿즈입니다</p>
+            </div>
+            <div class="card-hover">
+                <div class="img-placeholder kit-card aspect-[4/5] mb-4 relative">
+                    <span class="text-xs">Goods 3</span>
+                    <div class="absolute bottom-3 left-3 tag">New</div>
+                </div>
+                <h4 class="font-bold text-gray-900 mb-1">굿즈 3</h4>
+                <p class="text-xs text-gray-400">준비 중인 굿즈입니다</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────
+     MEDIA / VIDEO SLIDESHOW
+───────────────────────────────────────── -->
+<section id="media" class="video-section py-24">
+    <div class="max-w-screen-xl mx-auto px-6">
+
+        <div class="text-center mb-12">
+            <p class="section-eyebrow mb-3" style="color:var(--orange);">Highlight Reel</p>
+            <h2 class="font-heading text-4xl md:text-5xl font-bold text-white">
+                미디어
+            </h2>
+            <p class="mt-3" style="color:rgba(255,255,255,0.45); font-size:0.9rem;">지난 수련회의 순간들을 영상으로 만나보세요</p>
+        </div>
+
+        <!-- 슬라이더 래퍼 -->
+        <div class="slider-area px-6 md:px-8">
+            <div class="video-slider-wrap">
+                <div class="video-slider-track" id="sliderTrack">
+
+                    <!-- Slide 1 -->
+                    <div class="video-slide">
+                        <iframe src="https://www.youtube.com/embed/Cs3RUKwe5-c" allowfullscreen></iframe>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="video-slide">
+                        <iframe src="https://www.youtube.com/embed/iugCLVMRJ28" allowfullscreen></iframe>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 이전/다음 버튼 -->
+            <button class="slider-btn prev" id="slidePrev">&#8592;</button>
+            <button class="slider-btn next" id="slideNext">&#8594;</button>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────
+     공지사항
+───────────────────────────────────────── -->
+<section id="announcements" class="py-24" style="background:var(--cream);">
+    <div class="max-w-screen-xl mx-auto px-6">
+
+        <div class="text-center mb-14">
+            <p class="section-eyebrow mb-3">Announcements</p>
+            <h2 class="font-heading text-4xl md:text-5xl font-bold text-gray-900">
+                공지사항
+            </h2>
+        </div>
+
+        <div class="max-w-3xl mx-auto space-y-4" id="announcementList">
+
+            <!-- 공지 1 -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-orange-50">
+                <div class="flex items-center gap-4 px-6 py-5 cursor-pointer announcement-header">
+                    <span class="flex-shrink-0 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-widest" style="background:var(--coral); color:#fff;">필독</span>
+                    <p class="font-bold text-gray-800 flex-1 text-sm">2026 RESET 수련회 신청 안내</p>
+                    <span class="text-xs text-gray-400 flex-shrink-0">2026.05.01</span>
+                    <span class="announcement-arrow text-gray-400 text-lg transition-transform duration-300 flex-shrink-0">›</span>
+                </div>
+                <div class="announcement-body px-6 pb-6 hidden">
+                    <div class="border-t border-gray-100 pt-5 text-sm text-gray-500 leading-relaxed">
+                        <p>상세 내용이 입력되는 영역입니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 공지 2 -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-orange-50">
+                <div class="flex items-center gap-4 px-6 py-5 cursor-pointer announcement-header">
+                    <span class="flex-shrink-0 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-widest" style="background:var(--orange); color:#fff;">안내</span>
+                    <p class="font-bold text-gray-800 flex-1 text-sm">수련회 장소 및 교통편 안내</p>
+                    <span class="text-xs text-gray-400 flex-shrink-0">2026.05.08</span>
+                    <span class="announcement-arrow text-gray-400 text-lg transition-transform duration-300 flex-shrink-0">›</span>
+                </div>
+                <div class="announcement-body px-6 pb-6 hidden">
+                    <div class="border-t border-gray-100 pt-5 text-sm text-gray-500 leading-relaxed">
+                        <p>상세 내용이 입력되는 영역입니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 공지 3 -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-orange-50">
+                <div class="flex items-center gap-4 px-6 py-5 cursor-pointer announcement-header">
+                    <span class="flex-shrink-0 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-widest" style="background:var(--yellow); color:#1A1A2E;">굿즈</span>
+                    <p class="font-bold text-gray-800 flex-1 text-sm">RESET 2026 굿즈 사이즈 사전 조사</p>
+                    <span class="text-xs text-gray-400 flex-shrink-0">2026.05.10</span>
+                    <span class="announcement-arrow text-gray-400 text-lg transition-transform duration-300 flex-shrink-0">›</span>
+                </div>
+                <div class="announcement-body px-6 pb-6 hidden">
+                    <div class="border-t border-gray-100 pt-5 text-sm text-gray-500 leading-relaxed">
+                        <p>상세 내용이 입력되는 영역입니다.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────
+     FAQ
+───────────────────────────────────────── -->
+<section id="faq" class="py-24" style="background:#fff8f5;">
+    <div class="max-w-screen-xl mx-auto px-6">
+
+        <div class="text-center mb-14">
+            <p class="section-eyebrow mb-3">Frequently Asked Questions</p>
+            <h2 class="font-heading text-4xl md:text-5xl font-bold text-gray-900">
+                자주 묻는 <span style="color:var(--coral);">질문</span>
+            </h2>
+        </div>
+
+        <div class="max-w-3xl mx-auto space-y-3">
+
+            <!-- Q1 -->
+            <div class="faq-item bg-white rounded-2xl overflow-hidden shadow-sm border border-orange-50">
+                <button class="faq-header w-full flex items-center justify-between px-6 py-5 text-left gap-4">
+                    <div class="flex items-center gap-3">
+                        <span class="font-display text-lg flex-shrink-0" style="color:var(--coral);">Q</span>
+                        <span class="font-bold text-gray-800 text-sm">수련회 참가비는 얼마인가요?</span>
+                    </div>
+                    <span class="faq-icon text-gray-400 font-bold text-xl transition-transform duration-300 flex-shrink-0">+</span>
+                </button>
+                <div class="faq-answer hidden px-6 pb-6">
+                    <div class="flex gap-3 border-t border-gray-100 pt-5">
+                        <span class="font-display text-lg flex-shrink-0" style="color:var(--orange);">A</span>
+                        <p class="text-sm text-gray-500 leading-relaxed">등록된 내용이 없습니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="faq-item bg-white rounded-2xl overflow-hidden shadow-sm border border-orange-50">
+                <button class="faq-header w-full flex items-center justify-between px-6 py-5 text-left gap-4">
+                    <div class="flex items-center gap-3">
+                        <span class="font-display text-lg flex-shrink-0" style="color:var(--coral);">Q</span>
+                        <span class="font-bold text-gray-800 text-sm">수련회에 처음 참여하는데 괜찮을까요?</span>
+                    </div>
+                    <span class="faq-icon text-gray-400 font-bold text-xl transition-transform duration-300 flex-shrink-0">+</span>
+                </button>
+                <div class="faq-answer hidden px-6 pb-6">
+                    <div class="flex gap-3 border-t border-gray-100 pt-5">
+                        <span class="font-display text-lg flex-shrink-0" style="color:var(--orange);">A</span>
+                        <p class="text-sm text-gray-500 leading-relaxed">등록된 내용이 없습니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="faq-item bg-white rounded-2xl overflow-hidden shadow-sm border border-orange-50">
+                <button class="faq-header w-full flex items-center justify-between px-6 py-5 text-left gap-4">
+                    <div class="flex items-center gap-3">
+                        <span class="font-display text-lg flex-shrink-0" style="color:var(--coral);">Q</span>
+                        <span class="font-bold text-gray-800 text-sm">굿즈는 언제 받을 수 있나요?</span>
+                    </div>
+                    <span class="faq-icon text-gray-400 font-bold text-xl transition-transform duration-300 flex-shrink-0">+</span>
+                </button>
+                <div class="faq-answer hidden px-6 pb-6">
+                    <div class="flex gap-3 border-t border-gray-100 pt-5">
+                        <span class="font-display text-lg flex-shrink-0" style="color:var(--orange);">A</span>
+                        <p class="text-sm text-gray-500 leading-relaxed">등록된 내용이 없습니다.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────
+     CTA
+───────────────────────────────────────── -->
+<section id="cta" class="py-8 px-6">
+    <div class="max-w-screen-xl mx-auto">
+        <div class="cta-gradient rounded-[2.5rem] px-10 py-20 md:py-28 text-center relative overflow-hidden">
+            <!-- 장식 원 -->
+            <div class="deco-circle" style="width:400px;height:400px;bottom:-150px;left:-100px;"></div>
+            <div class="deco-circle" style="width:250px;height:250px;top:-80px;right:-50px;"></div>
+
+            <div class="relative z-10">
+                <span class="badge mb-6">Limited Spots Available</span>
+                <h2 class="font-display text-white leading-none mb-6" style="font-size:clamp(56px,10vw,120px); text-shadow:0 4px 24px rgba(0,0,0,0.15);">
+                    Ready to RESET?
+                </h2>
+                <p class="text-white/80 text-lg mb-10 max-w-sm mx-auto leading-relaxed">
+                    당신의 자리가 마련되어 있습니다.<br>
+                    지금 신청하고 우리와 함께 떠나세요.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────
+     FOOTER
+───────────────────────────────────────── -->
+<footer class="py-16 border-t" style="background:#fff8f5; border-color:rgba(255,92,92,0.1);">
+    <div class="max-w-screen-xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-10 mb-10">
+            <div>
+                <div class="flex items-center gap-2 mb-2">
+                    <span class="font-display text-2xl" style="color:var(--coral);">FLY</span>
+                    <span class="font-heading text-lg font-bold text-gray-700">WORSHIP CAMP</span>
+                </div>
+                <p class="text-xs text-gray-400 tracking-widest uppercase">RESET 2026 · Youth Retreat</p>
+            </div>
+            <div class="flex gap-14">
+                <div>
+                    <h5 class="text-[10px] font-bold text-gray-300 uppercase tracking-[0.2em] mb-3">Contact</h5>
+                    <p class="text-xs text-gray-500">reset2026@church.org</p>
+                    <p class="text-xs text-gray-500 mt-1">02-123-4567</p>
+                </div>
+                <div>
+                    <h5 class="text-[10px] font-bold text-gray-300 uppercase tracking-[0.2em] mb-3">Social</h5>
+                    <a href="#" class="text-xs font-bold transition-colors" style="color:var(--coral);">Instagram</a>
+                </div>
+            </div>
+        </div>
+        <div class="pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-4" style="border-color:rgba(255,92,92,0.08);">
+            <p class="text-[10px] text-gray-300 uppercase tracking-widest">© 2026 Church Name. ALL RIGHTS RESERVED.</p>
+            <div class="flex gap-6 text-[10px] font-bold text-gray-300 uppercase">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+// ── 공지사항 아코디언 ──
+document.querySelectorAll('.announcement-header').forEach(header => {
+    header.addEventListener('click', () => {
+        const body  = header.nextElementSibling;
+        const arrow = header.querySelector('.announcement-arrow');
+        const isOpen = !body.classList.contains('hidden');
+        body.classList.toggle('hidden', isOpen);
+        arrow.style.transform = isOpen ? '' : 'rotate(90deg)';
+    });
+});
+
+// ── FAQ 아코디언 ──
+document.querySelectorAll('.faq-header').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const answer = btn.nextElementSibling;
+        const icon   = btn.querySelector('.faq-icon');
+        const isOpen = !answer.classList.contains('hidden');
+        // 다른 항목 닫기
+        document.querySelectorAll('.faq-answer').forEach(a => a.classList.add('hidden'));
+        document.querySelectorAll('.faq-icon').forEach(i => { i.textContent = '+'; i.style.transform = ''; });
+        if (!isOpen) {
+            answer.classList.remove('hidden');
+            icon.textContent = '−';
+            icon.style.transform = 'rotate(0deg)';
+        }
+    });
+});
+
+// ── 햄버거 메뉴 ──
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+
+hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-label', isOpen ? '메뉴 닫기' : '메뉴 열기');
+});
+
+// 메뉴 링크 클릭 시 닫기
+document.querySelectorAll('.menu-link').forEach(link => {
+    link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+    });
+});
+
+// ── 비디오 슬라이더 ──
+const track   = document.getElementById('sliderTrack');
+const total   = 2; // 영상 개수
+let current   = 0;
+
+function goTo(idx) {
+    current = (idx + total) % total;
+    track.style.transform = `translateX(-${current * 100}%)`;
+}
+
+document.getElementById('slidePrev').addEventListener('click', () => { goTo(current - 1); });
+document.getElementById('slideNext').addEventListener('click', () => { goTo(current + 1); });
+
+// 터치 스와이프
+let touchStartX = 0;
+track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+track.addEventListener('touchend',   e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
+});
+
+// ── 일정표 탭 전환 ──
+function showDay(dayIdx) {
+    // 버튼 상태 변경
+    document.querySelectorAll('.day-tab').forEach((btn, idx) => {
+        btn.classList.toggle('active', idx === (dayIdx - 1));
+    });
+    // 콘텐츠 변경
+    document.querySelectorAll('.day-content').forEach((content, idx) => {
+        content.classList.toggle('hidden', idx !== (dayIdx - 1));
+    });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시안 05. 사이드바 - RE_TREAT 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;700&display=swap');
+        body { font-family: 'Pretendard', sans-serif; background-color: #ffffff; color: #1e293b; }
+        .navy-point { color: #0f172a; }
+        .bg-navy { background-color: #0f172a; }
+        .sidebar-link { border-left: 2px solid transparent; transition: all 0.2s ease; }
+        .sidebar-link.active { border-left-color: #0f172a; color: #0f172a; font-weight: 700; background-color: #f8fafc; }
+        .sidebar-link:hover:not(.active) { color: #0f172a; background-color: #f8fafc; }
+        .placeholder { background-color: #f8fafc; border: 1px solid #f1f5f9; display: flex; align-items: center; justify-content: center; color: #cbd5e1; }
+        .scroll-mt-24 { scroll-margin-top: 6rem; }
+    </style>
+</head>
+<body class="bg-white">
+    <div class="flex flex-col md:flex-row min-h-screen">
+        <!-- Sidebar Navigation -->
+        <aside class="md:w-72 md:fixed md:h-full border-r border-slate-100 p-8 flex flex-col justify-between bg-white z-50">
+            <div>
+                <div class="mb-16">
+                    <h1 class="font-bold text-2xl tracking-tighter navy-point">RE_TREAT</h1>
+                    <p class="text-[10px] font-bold tracking-[0.3em] text-slate-300 uppercase mt-1">July 2026</p>
+                </div>
+                <nav class="space-y-1">
+                    <a href="#intro" class="sidebar-link active block py-3 px-4 text-sm text-slate-400">수련회 소개</a>
+                    <a href="#info" class="sidebar-link block py-3 px-4 text-sm text-slate-400">상세 안내</a>
+                    <a href="#gifts" class="sidebar-link block py-3 px-4 text-sm text-slate-400">참가자 혜택 (Gift)</a>
+                    <a href="#notice" class="sidebar-link block py-3 px-4 text-sm text-slate-400">공지사항</a>
+                    <a href="#faq" class="sidebar-link block py-3 px-4 text-sm text-slate-400">FAQ</a>
+                </nav>
+            </div>
+            <div class="pt-8 border-t border-slate-50">
+                <button class="w-full bg-navy text-white py-4 rounded-xl text-xs font-bold uppercase tracking-widest shadow-xl shadow-navy/10 hover:bg-slate-800 transition-colors">
+                    Join Us
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="md:ml-72 flex-1 p-8 md:p-20 max-w-5xl">
+            <!-- Intro Section -->
+            <section id="intro" class="mb-32 scroll-mt-24">
+                <span class="text-[10px] font-bold tracking-[0.4em] text-slate-300 uppercase mb-4 block">Section 01</span>
+                <h2 class="text-4xl md:text-5xl font-bold navy-point mb-10 leading-tight">
+                    바쁜 걸음을 멈추고<br>침묵의 바다를 바라보세요.
+                </h2>
+                <div class="placeholder aspect-[21/9] rounded-3xl mb-12">Atmospheric Hero Image</div>
+                <div class="prose prose-slate max-w-none">
+                    <p class="text-lg text-slate-500 leading-relaxed font-light">
+                        우리는 너무 많은 연결 속에 살고 있습니다. 이번 수련회는 역설적으로 '단절'을 통해 '회복'을 찾고자 합니다. 
+                        스마트폰을 내려놓고, 온전히 나 자신과 창조주께만 집중하는 3박 4일간의 여정입니다.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Info Section -->
+            <section id="info" class="mb-32 scroll-mt-24">
+                <span class="text-[10px] font-bold tracking-[0.4em] text-slate-300 uppercase mb-4 block">Section 02</span>
+                <h2 class="text-3xl font-bold navy-point mb-10">상세 안내</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div class="p-8 border border-slate-50 rounded-3xl bg-slate-50/30">
+                        <h4 class="font-bold navy-point mb-4">일시 및 장소</h4>
+                        <p class="text-sm text-slate-500 leading-relaxed">
+                            2026년 7월 20일(월) ~ 23일(목)<br>
+                            강원도 양양군 묵상로 123 묵상센터
+                        </p>
+                    </div>
+                    <div class="p-8 border border-slate-50 rounded-3xl bg-slate-50/30">
+                        <h4 class="font-bold navy-point mb-4">참가 대상</h4>
+                        <p class="text-sm text-slate-500 leading-relaxed">
+                            본 교회 청년부 및 등록 교인<br>
+                            (선착순 100명 한정)
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Gifts Section -->
+            <section id="gifts" class="mb-32 scroll-mt-24">
+                <div class="flex justify-between items-baseline mb-10">
+                    <h2 class="text-3xl font-bold navy-point">참가자 혜택</h2>
+                    <span class="text-xs font-bold text-navy-point">Welcome Gift Pack</span>
+                </div>
+                <p class="text-sm text-slate-500 mb-12 leading-relaxed">
+                    수련회에 참여하는 모든 분들께 감사의 마음을 담아 자체 제작한 굿즈를 무상으로 드립니다. 
+                    현장 체크인 시 받아보실 수 있습니다.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="group">
+                        <div class="placeholder aspect-square rounded-3xl mb-4 group-hover:border-navy transition-colors">Item A</div>
+                        <h5 class="font-bold navy-point text-sm">Stay Eco Bag</h5>
+                    </div>
+                    <div class="group">
+                        <div class="placeholder aspect-square rounded-3xl mb-4 group-hover:border-navy transition-colors">Item B</div>
+                        <h5 class="font-bold navy-point text-sm">Silence Diary</h5>
+                    </div>
+                    <div class="group">
+                        <div class="placeholder aspect-square rounded-3xl mb-4 group-hover:border-navy transition-colors">Item C</div>
+                        <h5 class="font-bold navy-point text-sm">Wood Stationery Set</h5>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section id="faq" class="mb-32 scroll-mt-24">
+                <h2 class="text-3xl font-bold navy-point mb-10">FAQ</h2>
+                <div class="divide-y divide-slate-100">
+                    <div class="py-6">
+                        <h4 class="font-bold navy-point text-lg mb-2">Q. 개인 일정이 있어 부분 참석이 가능한가요?</h4>
+                        <p class="text-sm text-slate-400">집중도를 위해 가급적 전 일정 참석을 권장하지만, 부득이한 경우 사전에 담당자에게 연락 주시기 바랍니다.</p>
+                    </div>
+                    <div class="py-6">
+                        <h4 class="font-bold navy-point text-lg mb-2">Q. 숙소 배정은 어떻게 되나요?</h4>
+                        <p class="text-sm text-slate-400">성별 및 연령대를 고려하여 조별로 배정될 예정입니다.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Scripts for active link highlighting (Simple version) -->
+    <script>
+        const links = document.querySelectorAll('.sidebar-link');
+        const sections = document.querySelectorAll('section');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            links.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시안 04. 카드 그리드 (v2) - RESET 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700;800&display=swap');
+        body { font-family: 'Pretendard', sans-serif; background-color: #f1f5f9; color: #1e293b; letter-spacing: -0.02em; }
+        .navy-point { color: #0f172a; }
+        .bg-navy { background-color: #0f172a; }
+        .card-shadow { box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.08); }
+        .card-hover { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .card-hover:hover { transform: translateY(-12px); box-shadow: 0 30px 60px -15px rgba(15, 23, 42, 0.15); }
+        .placeholder { background-color: #ffffff; border: 1px dashed #e2e8f0; display: flex; align-items: center; justify-content: center; color: #cbd5e1; }
+        .bg-pattern { background-image: radial-gradient(#cbd5e1 0.5px, transparent 0.5px); background-size: 24px 24px; }
+    </style>
+</head>
+<body class="p-4 md:p-12 bg-pattern min-h-screen">
+    <div class="max-w-screen-2xl mx-auto space-y-8">
+        <!-- Floating Header -->
+        <header class="bg-white/80 backdrop-blur-xl rounded-[2.5rem] p-6 px-10 card-shadow border border-white/50 flex flex-col md:flex-row justify-between items-center gap-6 sticky top-4 z-50">
+            <div class="flex items-center space-x-6">
+                <div class="w-10 h-10 bg-navy rounded-2xl flex items-center justify-center text-white font-black italic">R</div>
+                <h1 class="font-black text-2xl navy-point tracking-tighter uppercase italic">Reset '26</h1>
+            </div>
+            <nav class="hidden md:flex bg-slate-100/50 p-1.5 rounded-2xl">
+                <a href="#" class="px-6 py-2.5 rounded-xl bg-white text-navy-point text-xs font-bold card-shadow">Main</a>
+                <a href="#" class="px-6 py-2.5 rounded-xl text-slate-400 text-xs font-bold hover:text-navy transition-colors">Information</a>
+                <a href="#" class="px-6 py-2.5 rounded-xl text-slate-400 text-xs font-bold hover:text-navy transition-colors">Gift Box</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <button class="text-xs font-bold navy-point px-4">Login</button>
+                <button class="bg-navy text-white px-8 py-3.5 rounded-2xl text-xs font-bold uppercase tracking-widest shadow-xl shadow-navy/20 hover:scale-105 transition-transform">신청하기</button>
+            </div>
+        </header>
+
+        <!-- Grid Layout -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <!-- Hero Card -->
+            <div class="md:col-span-3">
+                <div class="bg-white rounded-[3rem] p-12 md:p-20 card-shadow card-hover border border-white h-full relative overflow-hidden flex flex-col justify-end min-h-[500px]">
+                    <div class="relative z-10">
+                        <span class="text-[10px] font-bold text-white bg-navy px-4 py-1.5 rounded-full uppercase tracking-widest mb-8 inline-block">2026.07.20 - 07.23</span>
+                        <h2 class="text-5xl md:text-8xl font-black navy-point leading-[0.95] tracking-tighter mb-10">
+                            RESET<br>YOUR LIFE.
+                        </h2>
+                        <div class="flex flex-col md:flex-row items-baseline gap-8">
+                            <p class="text-lg text-slate-400 font-medium max-w-sm leading-snug">
+                                삶의 방향을 창조주께 다시 맞추는 고도화된 영적 초기화 프로젝트.
+                            </p>
+                            <div class="flex -space-x-4">
+                                <div class="w-12 h-12 rounded-full border-4 border-white placeholder text-[8px]">Img</div>
+                                <div class="w-12 h-12 rounded-full border-4 border-white placeholder text-[8px]">Img</div>
+                                <div class="w-12 h-12 rounded-full border-4 border-white placeholder text-[8px]">Img</div>
+                                <div class="w-12 h-12 bg-slate-100 rounded-full border-4 border-white flex items-center justify-center text-[10px] font-bold text-slate-400">+120</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Decor -->
+                    <div class="absolute top-12 right-12 w-32 h-32 placeholder rounded-full border-dashed animate-spin-slow">Icon</div>
+                </div>
+            </div>
+
+            <!-- Side Quick Info -->
+            <div class="md:col-span-1 space-y-8">
+                <div class="bg-white rounded-[3rem] p-10 card-shadow card-hover border border-white h-1/2 flex flex-col justify-between group">
+                    <div>
+                        <h3 class="text-xs font-bold text-slate-300 uppercase tracking-widest mb-6">Location</h3>
+                        <p class="text-xl font-bold navy-point leading-tight">Yangyang,<br>Stay Mist</p>
+                    </div>
+                    <div class="placeholder aspect-square rounded-2xl group-hover:bg-navy group-hover:text-white transition-colors duration-500">Map</div>
+                </div>
+                <div class="bg-navy rounded-[3rem] p-10 text-white card-shadow card-hover h-1/2 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xs font-bold opacity-30 uppercase tracking-widest mb-6">Deadline</h3>
+                        <p class="text-4xl font-black italic tracking-tighter">D-12</p>
+                    </div>
+                    <p class="text-[10px] font-bold opacity-50 uppercase tracking-widest">Early Bird Ends Soon</p>
+                </div>
+            </div>
+
+            <!-- Welcome Kit Section (Expanded) -->
+            <div class="md:col-span-4 bg-white rounded-[4rem] p-12 md:p-20 card-shadow border border-white relative overflow-hidden">
+                <div class="flex flex-col md:flex-row justify-between items-baseline mb-16 relative z-10">
+                    <div>
+                        <h2 class="text-4xl font-black navy-point tracking-tighter uppercase italic mb-4">RESET Welcome Kit</h2>
+                        <p class="text-slate-400 font-medium">새로운 출발을 기념하는 2026 수련회 공식 리미티드 패키지입니다.</p>
+                    </div>
+                    <div class="mt-8 md:mt-0 px-8 py-4 bg-slate-100 rounded-2xl font-black text-navy text-xl">FREE GIFT</div>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 relative z-10">
+                    <div class="space-y-6 group">
+                        <div class="placeholder aspect-[3/4] rounded-[2.5rem] card-shadow card-hover relative overflow-hidden">
+                            <span class="text-xs">Eco Bag</span>
+                            <div class="absolute inset-0 bg-navy opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                        </div>
+                        <div class="px-4">
+                            <h4 class="font-bold navy-point mb-1 italic">RESET Bag</h4>
+                            <p class="text-[10px] font-bold text-slate-300 uppercase">Limitless Storage</p>
+                        </div>
+                    </div>
+                    <div class="space-y-6 group">
+                        <div class="placeholder aspect-[3/4] rounded-[2.5rem] card-shadow card-hover relative overflow-hidden">
+                            <span class="text-xs">Diary</span>
+                            <div class="absolute inset-0 bg-navy opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                        </div>
+                        <div class="px-4">
+                            <h4 class="font-bold navy-point mb-1 italic">Soul RESET Note</h4>
+                            <p class="text-[10px] font-bold text-slate-300 uppercase">80p Grid Note</p>
+                        </div>
+                    </div>
+                    <div class="space-y-6 group">
+                        <div class="placeholder aspect-[3/4] rounded-[2.5rem] card-shadow card-hover relative overflow-hidden">
+                            <span class="text-xs">Bottle</span>
+                            <div class="absolute inset-0 bg-navy opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                        </div>
+                        <div class="px-4">
+                            <h4 class="font-bold navy-point mb-1 italic">Deep Bottle</h4>
+                            <p class="text-[10px] font-bold text-slate-300 uppercase">Eco Friendly</p>
+                        </div>
+                    </div>
+                    <div class="space-y-6 group">
+                        <div class="placeholder aspect-[3/4] rounded-[2.5rem] card-shadow card-hover relative overflow-hidden">
+                            <span class="text-xs">T-shirt</span>
+                            <div class="absolute inset-0 bg-navy opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                        </div>
+                        <div class="px-4">
+                            <h4 class="font-bold navy-point mb-1 italic">RESET Tee</h4>
+                            <p class="text-[10px] font-bold text-slate-300 uppercase">Premium Cotton</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Info Grid -->
+            <div class="md:col-span-2 bg-white rounded-[3rem] p-10 card-shadow border border-white">
+                <h3 class="text-xs font-bold text-slate-300 uppercase tracking-widest mb-6">Preparation</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between text-sm font-bold navy-point p-4 bg-slate-50 rounded-2xl">
+                        <span>성경책 & 필기도구</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <div class="flex items-center justify-between text-sm font-bold navy-point p-4 bg-slate-50 rounded-2xl">
+                        <span>개인 세면도구</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                </div>
+            </div>
+            <div class="md:col-span-2 bg-white rounded-[3rem] p-10 card-shadow border border-white">
+                <h3 class="text-xs font-bold text-slate-300 uppercase tracking-widest mb-6">Quick Link</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <button class="aspect-square bg-slate-50 rounded-[2rem] flex flex-col items-center justify-center gap-2 hover:bg-navy hover:text-white transition-all group">
+                        <span class="text-[10px] font-bold uppercase">Map</span>
+                    </button>
+                    <button class="aspect-square bg-slate-50 rounded-[2rem] flex flex-col items-center justify-center gap-2 hover:bg-navy hover:text-white transition-all group">
+                        <span class="text-[10px] font-bold uppercase">Bus</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="py-20 text-center">
+            <p class="text-[10px] font-black text-slate-300 uppercase tracking-[0.5em] italic">RESET 2026 OFFICIAL PORTAL</p>
+        </footer>
+    </div>
+</body>
+</html>

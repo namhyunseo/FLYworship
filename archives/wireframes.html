@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수련회 와이어프레임 - 미니멀 오션</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600&display=swap');
+        body { font-family: 'Pretendard', sans-serif; background-color: #ffffff; color: #1e293b; }
+        .navy-point { color: #0f172a; }
+        .bg-navy-point { background-color: #0f172a; }
+        .border-navy-point { border-color: #0f172a; }
+        .placeholder { background-color: #f1f5f9; border: 1px dashed #cbd5e1; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 0.875rem; }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
+        <div class="max-w-screen-xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="font-bold text-lg tracking-tight navy-point">RE_TREAT 2026</div>
+            <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-500">
+                <a href="#v1" class="hover:text-navy-point transition-colors">V1. Classic</a>
+                <a href="#v2" class="hover:text-navy-point transition-colors">V2. Split</a>
+                <a href="#v3" class="hover:text-navy-point transition-colors">V3. Typo</a>
+                <a href="#v4" class="hover:text-navy-point transition-colors">V4. Cards</a>
+                <a href="#v5" class="hover:text-navy-point transition-colors">V5. Sidebar</a>
+            </div>
+            <div class="md:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </div>
+        </div>
+    </nav>
+
+    <!-- [Concept 1] Classic Center -->
+    <section id="v1" class="py-24 px-6 border-b border-slate-100">
+        <div class="max-w-screen-md mx-auto text-center">
+            <span class="text-xs font-semibold tracking-widest text-slate-400 uppercase mb-4 block">Concept 01. Classic Center</span>
+            <h1 class="text-4xl md:text-5xl font-bold navy-point leading-tight mb-8">우리, 다시 시작하는 시간</h1>
+            <p class="text-lg text-slate-500 mb-12 leading-relaxed">2026 교회 연합 청년 수련회<br>신뢰와 평안 속에서 깊은 묵상을 경험하세요.</p>
+            <div class="placeholder w-full aspect-video rounded-2xl mb-12">Main Poster Placeholder (16:9)</div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+                <div>
+                    <h3 class="font-semibold navy-point mb-2">1. 수련회 정보</h3>
+                    <p class="text-sm text-slate-500">일시, 장소, 준비물 등 핵심 가이드를 확인하세요.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold navy-point mb-2">2. 자체 제작 굿즈</h3>
+                    <p class="text-sm text-slate-500">이번 수련회만을 위해 디자인된 특별한 아이템들.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold navy-point mb-2">3. FAQ / 공지</h3>
+                    <p class="text-sm text-slate-500">궁금한 점과 실시간 공지사항을 놓치지 마세요.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [Concept 2] Split Screen -->
+    <section id="v2" class="border-b border-slate-100">
+        <div class="flex flex-col md:flex-row min-h-[80vh]">
+            <div class="md:w-1/2 flex flex-col justify-center p-12 md:p-24 order-2 md:order-1">
+                <span class="text-xs font-semibold tracking-widest text-slate-400 uppercase mb-4 block">Concept 02. Split Screen</span>
+                <h2 class="text-4xl font-bold navy-point mb-6">깊은 바다와 같은<br>평안을 누리십시오.</h2>
+                <div class="flex space-x-4 mb-8">
+                    <button class="bg-navy-point text-white px-6 py-3 rounded-lg text-sm font-medium">정보 보기</button>
+                    <button class="border border-slate-200 px-6 py-3 rounded-lg text-sm font-medium">굿즈 상점</button>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3 text-slate-500 text-sm">
+                        <span class="w-2 h-2 rounded-full bg-navy-point"></span>
+                        <span>기간: 2026년 7월 20일 - 23일</span>
+                    </div>
+                    <div class="flex items-center space-x-3 text-slate-500 text-sm">
+                        <span class="w-2 h-2 rounded-full bg-navy-point"></span>
+                        <span>장소: 강원도 양양 묵상 센터</span>
+                    </div>
+                </div>
+            </div>
+            <div class="md:w-1/2 placeholder min-h-[400px] md:min-h-full order-1 md:order-2">
+                Large Image/Key Visual Placeholder
+            </div>
+        </div>
+    </section>
+
+    <!-- [Concept 3] Typography Focus -->
+    <section id="v3" class="py-32 px-6 border-b border-slate-100 bg-slate-50/30">
+        <div class="max-w-screen-xl mx-auto">
+            <span class="text-xs font-semibold tracking-widest text-slate-400 uppercase mb-12 block">Concept 03. Typography Focus</span>
+            <div class="space-y-16">
+                <div class="max-w-2xl">
+                    <h2 class="text-5xl md:text-7xl font-light text-slate-300 mb-6">BE STILL.</h2>
+                    <p class="text-2xl md:text-3xl font-semibold navy-point leading-tight">
+                        침묵 속에서 들리는<br>세밀한 음성에 집중하는 3일.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-24 items-end">
+                    <div class="placeholder w-full aspect-square rounded-full max-w-xs mx-auto md:mx-0">Circle Graphic</div>
+                    <div class="text-slate-500 leading-relaxed text-lg">
+                        우리는 너무 많은 소음에 노출되어 있습니다. <br>
+                        이번 수련회는 화려한 조명보다 은은한 촛불을, <br>
+                        큰 외침보다 깊은 기도를 지향합니다.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [Concept 4] Minimal Card Grid -->
+    <section id="v4" class="py-24 px-6 border-b border-slate-100">
+        <div class="max-w-screen-xl mx-auto">
+            <div class="mb-16">
+                <span class="text-xs font-semibold tracking-widest text-slate-400 uppercase mb-4 block">Concept 04. Minimal Card Grid</span>
+                <h2 class="text-3xl font-bold navy-point">핵심 카테고리</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Info Card -->
+                <div class="group border border-slate-100 p-8 rounded-3xl hover:border-navy-point transition-all duration-300 cursor-pointer">
+                    <div class="placeholder w-12 h-12 rounded-xl mb-6 group-hover:bg-navy-point/5">Icon</div>
+                    <h3 class="text-xl font-bold navy-point mb-4">수련회 정보</h3>
+                    <ul class="text-sm text-slate-500 space-y-2 mb-8">
+                        <li>• 상세 일정표</li>
+                        <li>• 오시는 길 가이드</li>
+                        <li>• 조별 편성 확인</li>
+                    </ul>
+                    <span class="text-xs font-bold navy-point uppercase tracking-widest">Detail →</span>
+                </div>
+                <!-- Goods Card -->
+                <div class="group border border-slate-100 p-8 rounded-3xl hover:border-navy-point transition-all duration-300 cursor-pointer">
+                    <div class="placeholder w-12 h-12 rounded-xl mb-6 group-hover:bg-navy-point/5">Icon</div>
+                    <h3 class="text-xl font-bold navy-point mb-4">자체 제작 굿즈</h3>
+                    <div class="placeholder w-full aspect-video rounded-xl mb-4 text-[10px]">Goods Thumbnail</div>
+                    <p class="text-sm text-slate-500 mb-6">수련회 티셔츠, 에코백, 다이어리 등</p>
+                    <span class="text-xs font-bold navy-point uppercase tracking-widest">Store →</span>
+                </div>
+                <!-- Notice Card -->
+                <div class="group border border-slate-100 p-8 rounded-3xl hover:border-navy-point transition-all duration-300 cursor-pointer">
+                    <div class="placeholder w-12 h-12 rounded-xl mb-6 group-hover:bg-navy-point/5">Icon</div>
+                    <h3 class="text-xl font-bold navy-point mb-4">FAQ / 공지</h3>
+                    <div class="space-y-4 mb-8">
+                        <div class="pb-2 border-b border-slate-50">
+                            <p class="text-xs text-slate-400 mb-1">2026.05.10</p>
+                            <p class="text-sm font-medium navy-point truncate">준비물 리스트 최종 업데이트</p>
+                        </div>
+                        <div class="pb-2 border-b border-slate-50">
+                            <p class="text-xs text-slate-400 mb-1">2026.05.08</p>
+                            <p class="text-sm font-medium navy-point truncate">셔틀버스 탑승 장소 안내</p>
+                        </div>
+                    </div>
+                    <span class="text-xs font-bold navy-point uppercase tracking-widest">All Notices →</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [Concept 5] Sticky Sidebar -->
+    <section id="v5" class="py-24 px-6 border-b border-slate-100 bg-slate-50/50">
+        <div class="max-w-screen-xl mx-auto flex flex-col md:flex-row gap-16">
+            <div class="md:w-1/4">
+                <div class="md:sticky md:top-32">
+                    <span class="text-xs font-semibold tracking-widest text-slate-400 uppercase mb-4 block">Concept 05. Sticky Sidebar</span>
+                    <h2 class="text-2xl font-bold navy-point mb-8 leading-tight">필요한 정보를<br>찾아보세요</h2>
+                    <div class="flex flex-col space-y-4 text-sm font-medium">
+                        <a href="#" class="text-navy-point border-l-2 border-navy-point pl-4">수련회 개요</a>
+                        <a href="#" class="text-slate-400 hover:text-navy-point transition-colors pl-4 border-l-2 border-transparent">굿즈 라인업</a>
+                        <a href="#" class="text-slate-400 hover:text-navy-point transition-colors pl-4 border-l-2 border-transparent">자주 묻는 질문</a>
+                        <a href="#" class="text-slate-400 hover:text-navy-point transition-colors pl-4 border-l-2 border-transparent">문의하기</a>
+                    </div>
+                </div>
+            </div>
+            <div class="md:w-3/4 space-y-24">
+                <div>
+                    <h3 class="text-xl font-bold navy-point mb-6 italic underline decoration-slate-200 underline-offset-8">Section: Overview</h3>
+                    <div class="placeholder w-full aspect-[21/9] rounded-2xl mb-8">Hero Banner Placeholder</div>
+                    <p class="text-slate-500 leading-relaxed">
+                        이번 2026 수련회 'RE_TREAT'은 바쁜 일상에서 벗어나 본연의 나를 대면하고, 
+                        공동체 안에서 새로운 비전을 발견하는 것을 목표로 합니다. 
+                        엄선된 장소와 차분한 프로그램 구성을 통해 최상의 영적 경험을 제공합니다.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold navy-point mb-6 italic underline decoration-slate-200 underline-offset-8">Section: Goods</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="placeholder aspect-square rounded-xl">Goods Item A</div>
+                        <div class="placeholder aspect-square rounded-xl">Goods Item B</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 bg-white">
+        <div class="max-w-screen-xl mx-auto text-center">
+            <div class="text-xs font-semibold tracking-widest text-slate-400 uppercase mb-4">RE_TREAT 2026</div>
+            <p class="text-xs text-slate-400">© 2026 CHURCH NAME. ALL RIGHTS RESERVED.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
