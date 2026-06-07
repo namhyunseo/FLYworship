@@ -272,6 +272,85 @@
         /* ─── 키트 그리드 ─── */
         .kit-card { border-radius: 24px; overflow: hidden; }
 
+        /* ─── 찬양의 밤 섹션 ─── */
+        .worship-night {
+            background:
+                radial-gradient(circle at top left, rgba(183,228,199,0.46), transparent 34rem),
+                linear-gradient(180deg, #fffaf0 0%, #f4fbf8 100%);
+        }
+        .worship-panel {
+            background: rgba(255,255,255,0.86);
+            border: 1px solid rgba(47,143,107,0.16);
+            border-radius: 24px;
+            box-shadow: 0 18px 48px rgba(20,51,42,0.08);
+        }
+        .worship-field {
+            width: 100%;
+            border: 1.5px solid rgba(47,143,107,0.18);
+            border-radius: 14px;
+            background: #fff;
+            padding: 13px 14px;
+            color: #1f2937;
+            font-size: 0.9rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .worship-field:focus {
+            outline: none;
+            border-color: rgba(47,143,107,0.72);
+            box-shadow: 0 0 0 4px rgba(47,143,107,0.10);
+        }
+        .worship-field::placeholder { color: #a3a3a3; }
+        .worship-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #374151;
+            font-size: 0.78rem;
+            font-weight: 900;
+        }
+        .worship-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 9px 12px;
+            border: 1.5px solid rgba(47,143,107,0.18);
+            border-radius: 999px;
+            background: #fff;
+            color: #4b5563;
+            font-size: 0.78rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s, color 0.2s;
+        }
+        .worship-chip input { accent-color: var(--coral); }
+        .worship-chip:has(input:checked) {
+            border-color: rgba(47,143,107,0.72);
+            background: rgba(183,228,199,0.38);
+            color: var(--dark);
+        }
+        .worship-submit {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            min-height: 48px;
+            border-radius: 14px;
+            background: var(--dark);
+            color: #fff;
+            font-size: 0.9rem;
+            font-weight: 900;
+            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+        }
+        .worship-submit:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 14px 28px rgba(20,51,42,0.18);
+            background: #0f2a23;
+        }
+        .worship-secondary {
+            color: var(--coral);
+            font-size: 0.78rem;
+            font-weight: 900;
+        }
+
         /* ─── CTA 섹션 ─── */
         .cta-gradient {
             background: linear-gradient(135deg, #1F6F55 0%, #3BA7A0 58%, #B7E4C7 100%);
@@ -901,6 +980,92 @@
 
 
 <!-- ─────────────────────────────────────────
+     PRAISE NIGHT SONG REQUESTS
+───────────────────────────────────────── -->
+<section id="worship-night" class="worship-night py-24">
+    <div class="max-w-screen-xl mx-auto px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 items-start">
+            <div>
+                <p class="section-eyebrow mb-3">Praise Night Requests</p>
+                <h2 class="font-heading text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-5" style="word-break:keep-all;">
+                    찬양의 밤<br>
+                    <span style="color:var(--coral);">사연과 추천곡</span>
+                </h2>
+                <p class="text-gray-600 text-base md:text-lg leading-relaxed mb-7" style="word-break:keep-all;">
+                    수련회 중 함께 부르고 싶은 찬양과 그 곡을 추천하는 이유를 보내 주세요. 남겨 주신 사연은 찬양의 밤 선곡과 나눔 준비에 참고됩니다.
+                </p>
+
+                <div class="space-y-3">
+                    <div class="info-card flex items-start gap-4">
+                        <div class="info-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-sm mb-1">추천곡</h4>
+                            <p class="text-xs text-gray-600 leading-relaxed">곡명은 필수, 아티스트나 버전은 알면 함께 적어 주세요.</p>
+                        </div>
+                    </div>
+                    <div class="info-card flex items-start gap-4">
+                        <div class="info-icon" style="background:#3BA7A0;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a4 4 0 0 1-4 4H7l-4 4V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-sm mb-1">사연</h4>
+                            <p class="text-xs text-gray-600 leading-relaxed">왜 이 찬양을 함께 부르고 싶은지, 어떤 마음으로 추천하는지 적습니다.</p>
+                        </div>
+                    </div>
+                    <div class="info-card flex items-start gap-4">
+                        <div class="info-icon" style="background:#14332A;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-sm mb-1">운영 방식</h4>
+                            <p class="text-xs text-gray-600 leading-relaxed">제출된 내용은 담당팀이 확인하며, 사연 소개 여부는 현장 흐름에 맞춰 조정됩니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <form id="worshipForm" class="worship-panel p-6 md:p-8 space-y-5 max-w-2xl ml-auto">
+                    <div>
+                        <label for="worshipName" class="worship-label">이름 또는 닉네임 <span class="text-gray-400 font-bold">(선택)</span></label>
+                        <input id="worshipName" class="worship-field" type="text" autocomplete="name" placeholder="예: 홍길동">
+                    </div>
+                    <div>
+                        <label for="songTitle" class="worship-label">추천 찬양 <span style="color:var(--coral);">*</span></label>
+                        <input id="songTitle" class="worship-field" type="text" required placeholder="예: 주 이름 찬양">
+                    </div>
+                    <div>
+                        <label for="songArtist" class="worship-label">아티스트 / 버전 <span class="text-gray-400 font-bold">(선택)</span></label>
+                        <input id="songArtist" class="worship-field" type="text" placeholder="예: 마커스워십, 어노인팅, 원곡 등">
+                    </div>
+                    <div>
+                        <span class="worship-label">추천 이유의 방향</span>
+                        <div class="flex flex-wrap gap-2">
+                            <label class="worship-chip"><input type="radio" name="songMood" value="회복" checked> 회복</label>
+                            <label class="worship-chip"><input type="radio" name="songMood" value="감사"> 감사</label>
+                            <label class="worship-chip"><input type="radio" name="songMood" value="결단"> 결단</label>
+                            <label class="worship-chip"><input type="radio" name="songMood" value="위로"> 위로</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="songStory" class="worship-label">사연 <span style="color:var(--coral);">*</span></label>
+                        <textarea id="songStory" class="worship-field min-h-[132px] resize-y" required maxlength="420" placeholder="이 찬양을 함께 부르고 싶은 이유를 적어 주세요."></textarea>
+                        <p class="mt-2 text-[11px] text-gray-400 text-right"><span id="storyCount">0</span>/420</p>
+                    </div>
+                    <button type="submit" class="worship-submit">추천곡 제출하기</button>
+                    <p id="worshipStatus" class="text-xs text-gray-500 leading-relaxed" aria-live="polite">
+                        제출해 주신 내용은 찬양의 밤 준비팀이 확인합니다.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────
      MEDIA / VIDEO SLIDESHOW
 ───────────────────────────────────────── -->
 <section id="media" class="video-section py-24">
@@ -1223,6 +1388,31 @@ document.querySelectorAll('.menu-link').forEach(link => {
         mobileMenu.classList.remove('open');
         hamburger.classList.remove('open');
     });
+});
+
+// ── 찬양의 밤 추천 폼 ──
+const worshipForm = document.getElementById('worshipForm');
+const worshipStatus = document.getElementById('worshipStatus');
+const storyField = document.getElementById('songStory');
+const storyCount = document.getElementById('storyCount');
+
+storyField.addEventListener('input', () => {
+    storyCount.textContent = storyField.value.length;
+});
+
+worshipForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const songTitle = document.getElementById('songTitle').value.trim();
+    const story = storyField.value.trim();
+
+    if (!songTitle || !story) {
+        worshipStatus.textContent = '추천 찬양과 사연을 모두 입력해 주세요.';
+        return;
+    }
+
+    worshipForm.reset();
+    storyCount.textContent = '0';
+    worshipStatus.textContent = '추천곡과 사연이 제출되었습니다. 함께 나눌 찬양을 준비할 때 참고하겠습니다.';
 });
 
 // ── 비디오 슬라이더 ──
