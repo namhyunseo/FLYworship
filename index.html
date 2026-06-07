@@ -343,6 +343,12 @@
             box-shadow: 0 14px 28px rgba(20,51,42,0.18);
             background: #0f2a23;
         }
+        .worship-submit:disabled {
+            opacity: 0.6;
+            cursor: default;
+            transform: none;
+            box-shadow: none;
+        }
         .worship-secondary {
             color: var(--coral);
             font-size: 0.78rem;
@@ -1025,6 +1031,8 @@
 
             <div>
                 <form id="worshipForm" class="worship-panel p-6 md:p-8 space-y-5 max-w-2xl ml-auto">
+                    <!-- 스팸 방지용 허니팟 (사람에겐 안 보임) -->
+                    <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
                     <div>
                         <label for="worshipName" class="worship-label">이름 또는 닉네임 <span class="text-gray-400 font-bold">(선택)</span></label>
                         <input id="worshipName" class="worship-field" type="text" autocomplete="name" placeholder="예: 홍길동">
@@ -1392,12 +1400,13 @@ const worshipForm = document.getElementById('worshipForm');
 const worshipStatus = document.getElementById('worshipStatus');
 const storyField = document.getElementById('songStory');
 const storyCount = document.getElementById('storyCount');
+const worshipSubmit = worshipForm.querySelector('.worship-submit');
 
 storyField.addEventListener('input', () => {
     storyCount.textContent = storyField.value.length;
 });
 
-worshipForm.addEventListener('submit', (event) => {
+worshipForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     const songTitle = document.getElementById('songTitle').value.trim();
     const story = storyField.value.trim();
@@ -1407,9 +1416,37 @@ worshipForm.addEventListener('submit', (event) => {
         return;
     }
 
-    worshipForm.reset();
-    storyCount.textContent = '0';
-    worshipStatus.textContent = '추천곡과 사연이 제출되었습니다. 함께 나눌 찬양을 준비할 때 참고하겠습니다.';
+    const payload = {
+        name: document.getElementById('worshipName').value.trim(),
+        songTitle,
+        songArtist: document.getElementById('songArtist').value.trim(),
+        songMood: (worshipForm.querySelector('input[name="songMood"]:checked') || {}).value || '',
+        story,
+        website: (worshipForm.querySelector('input[name="website"]') || {}).value || '',
+    };
+
+    const originalLabel = worshipSubmit.textContent;
+    worshipSubmit.disabled = true;
+    worshipSubmit.textContent = '전송 중...';
+    worshipStatus.textContent = '';
+
+    try {
+        const res = await fetch('/api/worship-request', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+        });
+        if (!res.ok) throw new Error('request failed');
+
+        worshipForm.reset();
+        storyCount.textContent = '0';
+        worshipStatus.textContent = '추천곡과 사연이 제출되었습니다. 함께 나눌 찬양을 준비할 때 참고하겠습니다.';
+    } catch (err) {
+        worshipStatus.textContent = '전송에 실패했습니다. 잠시 후 다시 시도해 주세요.';
+    } finally {
+        worshipSubmit.disabled = false;
+        worshipSubmit.textContent = originalLabel;
+    }
 });
 
 // ── 비디오 슬라이더 ──
