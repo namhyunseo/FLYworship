@@ -12,6 +12,28 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&family=Bebas+Neue&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- ─── Google Analytics (GA4) ─── -->
+    <script>
+        // ▼▼▼ 본인 GA4 측정 ID로 한 번만 바꾸세요 (G-로 시작) ▼▼▼
+        const GA_MEASUREMENT_ID = 'G-17Z0NDZ34E';
+        // ▲▲▲ 이 한 곳만 바꾸면 됩니다 ▲▲▲
+
+        if (GA_MEASUREMENT_ID && GA_MEASUREMENT_ID !== 'G-XXXXXXXXXX') {
+            const s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_MEASUREMENT_ID;
+            document.head.appendChild(s);
+        }
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', GA_MEASUREMENT_ID);
+    </script>
+
+    <!-- ─── Vercel Web Analytics (정적 사이트는 스크립트 수동 삽입 필요) ─── -->
+    <script defer src="/_vercel/insights/script.js"></script>
+
     <style>
         * { box-sizing: border-box; }
         body {
@@ -69,6 +91,20 @@
             font-size: 0.68rem !important;
             padding: 5px 12px;
             gap: 4px !important;
+        }
+        .info-verse {
+            font-size: 1rem;
+            line-height: 1.75;
+        }
+        .info-verse-line {
+            display: block;
+            white-space: nowrap;
+        }
+        .scripture-ref {
+            font-size: 0.86em;
+        }
+        .cta-copy-line {
+            white-space: nowrap;
         }
 
         /* ─── 버튼 ─── */
@@ -495,10 +531,11 @@
             width: 100%;
             position: relative;
             overflow: hidden;
+            aspect-ratio: 16/9;
         }
         .video-slide iframe {
             width: 100%;
-            aspect-ratio: 16/9;
+            height: 100%;
             display: block;
             border: none;
         }
@@ -650,6 +687,9 @@
                 font-size: 0.64rem !important;
                 padding: 5px 11px;
             }
+            .info-verse {
+                font-size: 1.125rem;
+            }
         }
 
         /* 모바일 */
@@ -692,6 +732,20 @@
                 font-size: 0.62rem !important;
                 padding: 4px 10px;
             }
+            .info-verse {
+                font-size: 0.8rem;
+                line-height: 1.85;
+                margin-bottom: 2rem !important;
+            }
+            .cta-gradient {
+                padding-left: 1.25rem !important;
+                padding-right: 1.25rem !important;
+                border-radius: 1.75rem !important;
+            }
+            .cta-copy {
+                font-size: 0.92rem !important;
+                max-width: none !important;
+            }
             .info-title {
                 white-space: normal;
             }
@@ -699,6 +753,13 @@
                 border-radius: 28px;
             }
             .video-thumb-row { display: none; }
+            .video-section .slider-area {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+            }
+            .video-slider-wrap {
+                border-radius: 12px;
+            }
             /* 로고 크기 축소 */
             .nav-logo { height: 24px !important; }
             /* 슬라이더 버튼을 영상 아래로 이동 */
@@ -710,6 +771,22 @@
             }
             .slider-btn.prev { left: calc(50% - 52px); }
             .slider-btn.next { right: calc(50% - 52px); left: auto; }
+        }
+        @media (max-width: 380px) {
+            .info-verse {
+                font-size: 0.72rem;
+            }
+            .cta-copy {
+                font-size: 0.84rem !important;
+            }
+        }
+        @media (max-width: 340px) {
+            .info-verse {
+                font-size: 0.67rem;
+            }
+            .cta-copy {
+                font-size: 0.78rem !important;
+            }
         }
     </style>
 </head>
@@ -801,7 +878,7 @@
                 <!-- 기본 정보 칩 -->
                 <div class="hero-meta flex flex-wrap gap-2.5">
                     <span class="badge" style="font-size:0.75rem;display:inline-flex;align-items:center;gap:5px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>2026.07.03 – 07.05</span>
-                    <span class="badge" style="font-size:0.75rem;display:inline-flex;align-items:center;gap:5px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>경기도 평택</span>
+                    <span class="badge" style="font-size:0.75rem;display:inline-flex;align-items:center;gap:5px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>무봉산 청소년 수련원</span>
                     <span class="badge" style="font-size:0.75rem;display:inline-flex;align-items:center;gap:5px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>청년부 수련회</span>
                 </div>
             </div>
@@ -823,9 +900,9 @@
                 <h2 class="info-title font-heading font-bold text-gray-900 mb-6 leading-tight" style="word-break:keep-all;">
                     <span style="color:var(--coral);">우선순위</span>를 분명히 하는 <span style="color:var(--coral);">청년회</span>
                 </h2>
-                <p class="text-gray-700 text-base md:text-lg leading-relaxed mb-8">
-                    그런즉 너희는 먼저 그의 나라와 그의 의를 구하라<br>
-                    그리하면 이 모든 것을 너희에게 더하시리라 <span class="text-sm">(마태복음 6:33)</span>
+                <p class="info-verse text-gray-700 mb-8">
+                    <span class="info-verse-line">그런즉 너희는 먼저 그의 나라와 그의 의를 구하라</span>
+                    <span class="info-verse-line">그리하면 이 모든 것을 너희에게 더하시리라 <span class="scripture-ref">(마태복음 6:33)</span></span>
                 </p>
 
                 <div class="space-y-3 max-w-2xl">
@@ -1293,9 +1370,9 @@
                 <h2 class="font-display text-white leading-none mb-6" style="font-size:clamp(56px,10vw,120px); text-shadow:0 4px 24px rgba(0,0,0,0.15);">
                     Ready to RESET?
                 </h2>
-                <p class="text-white/80 text-lg mb-10 max-w-sm mx-auto leading-relaxed">
-                    당신의 자리가 마련되어 있습니다.<br>
-                    지금 신청하고 우리와 함께 떠나세요.
+                <p class="cta-copy text-white/80 text-lg mb-10 max-w-sm mx-auto leading-relaxed">
+                    <span>당신의 자리가 마련되어 있습니다.</span><br>
+                    <span class="cta-copy-line">지금 신청하고 우리와 함께 떠나세요.</span>
                 </p>
                 <a href="#announcements" class="btn-white">신청 안내 확인하기</a>
             </div>
@@ -1349,6 +1426,23 @@
 </div>
 
 <script>
+// ── GA4 이벤트 추적 헬퍼 ──
+function trackEvent(name, params) {
+    if (typeof gtag === 'function') gtag('event', name, params || {});
+}
+
+// ── CTA 버튼 클릭 (RESET 시작하기 / 신청 안내 확인하기) ──
+document.querySelectorAll('.nav-cta, #mobileMenu a[href="#cta"], .btn-white').forEach(el => {
+    el.addEventListener('click', () => {
+        trackEvent('cta_click', {
+            cta_label: el.textContent.trim(),
+            cta_location: el.classList.contains('nav-cta') ? 'nav'
+                        : el.classList.contains('btn-white') ? 'announcements'
+                        : 'mobile_menu'
+        });
+    });
+});
+
 // ── 공지사항 아코디언 ──
 document.querySelectorAll('.announcement-header').forEach(header => {
     header.addEventListener('click', () => {
@@ -1357,6 +1451,11 @@ document.querySelectorAll('.announcement-header').forEach(header => {
         const isOpen = !body.classList.contains('hidden');
         body.classList.toggle('hidden', isOpen);
         arrow.style.transform = isOpen ? '' : 'rotate(90deg)';
+        // 펼칠 때만 집계
+        if (!isOpen) {
+            const title = header.querySelector('p.font-bold');
+            trackEvent('announcement_open', { announcement_title: title ? title.textContent.trim() : '' });
+        }
     });
 });
 
@@ -1373,6 +1472,8 @@ document.querySelectorAll('.faq-header').forEach(btn => {
             answer.classList.remove('hidden');
             icon.textContent = '−';
             icon.style.transform = 'rotate(0deg)';
+            const q = btn.querySelector('.gap-3 span.font-bold');
+            trackEvent('faq_open', { faq_question: q ? q.textContent.trim() : '' });
         }
     });
 });
@@ -1480,6 +1581,7 @@ function showDay(dayIdx) {
     document.querySelectorAll('.day-content').forEach((content, idx) => {
         content.classList.toggle('hidden', idx !== (dayIdx - 1));
     });
+    trackEvent('schedule_day_view', { day: dayIdx });
 }
 
 // ── 플로팅 공지 버튼 ──
