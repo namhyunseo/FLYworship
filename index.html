@@ -366,6 +366,133 @@
 
         /* ─── 키트 그리드 ─── */
         .kit-card { border-radius: 24px; overflow: hidden; }
+        .kit-desc {
+            word-break: keep-all;       /* 단어 단위 줄바꿈 */
+            text-wrap: balance;          /* 두 줄일 때 줄 길이 균형 */
+            line-height: 1.45;
+        }
+        .kit-card img { cursor: zoom-in; }
+
+        /* ─── 굿즈 라이트박스 (카드 캐러셀) ─── */
+        .kit-lightbox {
+            --card-w: min(400px, 90vw);
+            position: fixed;
+            inset: 0;
+            z-index: 120;
+            overflow: hidden;
+            background: rgba(16,30,24,0.62);
+            backdrop-filter: blur(8px);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.28s ease, visibility 0.28s ease;
+        }
+        .kit-lightbox.show { opacity: 1; visibility: visible; }
+        .kit-lb-track {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            transition: transform 0.42s cubic-bezier(0.4, 0.05, 0.2, 1);
+            will-change: transform;
+        }
+        .kit-lb-slide {
+            flex: 0 0 100%;
+            min-width: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        .kit-lb-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            width: var(--card-w);
+            background: #fff;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 32px 80px rgba(10,30,24,0.42), 0 0 0 1px rgba(255,255,255,0.06);
+            transform: translateY(18px) scale(0.95);
+            opacity: 0;
+            transition: transform 0.4s cubic-bezier(0.34, 1.3, 0.5, 1), opacity 0.3s ease;
+        }
+        .kit-lightbox.show .kit-lb-card { transform: none; opacity: 1; }
+        .kit-lightbox-media {
+            position: relative;
+            background:
+                radial-gradient(120% 90% at 50% 0%, #ffffff 0%, var(--cream) 78%);
+            padding: 20px 20px 18px;
+        }
+        .kit-lightbox-media img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            max-height: 56vh;
+            object-fit: cover;
+            border-radius: 18px;
+            box-shadow: 0 12px 26px rgba(20,51,42,0.16);
+            user-select: none;
+            -webkit-user-drag: none;
+            pointer-events: none;
+        }
+        .kit-lightbox-counter {
+            position: absolute;
+            left: 50%; transform: translateX(-50%);
+            bottom: 14px;
+            padding: 3px 12px;
+            border-radius: 999px;
+            background: rgba(20,51,42,0.50);
+            backdrop-filter: blur(6px);
+            color: rgba(255,255,255,0.85);
+            font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em;
+        }
+        .kit-lightbox-counter b { color: #fff; }
+        .kit-lightbox-nav {
+            position: absolute;
+            top: 50%;
+            z-index: 3;
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            background: none;
+            color: #fff;
+            border: none;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5));
+            transition: transform 0.2s ease, visibility 0.2s;
+        }
+        .kit-lightbox-nav:hover { transform: translateY(-50%) scale(1.12); }
+        .kit-lightbox-nav:active { transform: translateY(-50%) scale(0.92); }
+        .kit-lightbox-nav.prev { left: max(14px, calc(50% - var(--card-w) / 2 - 56px)); transform: translateY(-50%); }
+        .kit-lightbox-nav.next { right: max(14px, calc(50% - var(--card-w) / 2 - 56px)); transform: translateY(-50%); }
+        .kit-lightbox-nav[hidden] { opacity: 0; visibility: hidden; pointer-events: none; }
+        .kit-lightbox-cap {
+            padding: 20px 24px 26px;
+        }
+        .kit-lightbox-cap .lb-eyebrow {
+            display: inline-flex; align-items: center; gap: 7px;
+            font-size: 0.58rem; font-weight: 800;
+            letter-spacing: 0.18em; text-transform: uppercase;
+            color: var(--coral);
+            margin-bottom: 9px;
+        }
+        .kit-lightbox-cap .lb-eyebrow::before,
+        .kit-lightbox-cap .lb-eyebrow::after {
+            content: ""; width: 14px; height: 1.5px;
+            background: rgba(47,143,107,0.35); border-radius: 2px;
+        }
+        .kit-lightbox-cap .lb-title {
+            font-weight: 800; font-size: 1.2rem; color: var(--dark);
+            letter-spacing: -0.015em;
+        }
+        .kit-lightbox-cap .lb-desc  {
+            font-size: 0.875rem; color: #738781; margin-top: 6px;
+            word-break: keep-all; line-height: 1.5;
+        }
+        @media (max-width: 640px) {
+            .kit-lightbox-nav { width: 40px; height: 40px; }
+            .kit-lightbox-nav.prev { left: 10px; }
+            .kit-lightbox-nav.next { right: 10px; }
+        }
 
         /* ─── 찬양의 밤 섹션 ─── */
         .worship-night {
@@ -436,6 +563,44 @@
             background: rgba(183,228,199,0.38);
             color: var(--dark);
         }
+        /* ─── 찬양의 밤 신청 마감 카드 ─── */
+        .worship-closed {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .worship-closed-icon {
+            width: 64px; height: 64px;
+            border-radius: 20px;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff;
+            background: linear-gradient(140deg, #3BA7A0 0%, var(--coral) 60%, #14332A 100%);
+            box-shadow: 0 10px 24px rgba(47,143,107,0.30);
+            margin-bottom: 20px;
+        }
+        .worship-closed-badge {
+            display: inline-block;
+            padding: 5px 14px;
+            border-radius: 999px;
+            background: rgba(20,51,42,0.06);
+            border: 1px solid rgba(20,51,42,0.10);
+            color: var(--dark);
+            font-size: 0.66rem; font-weight: 800;
+            letter-spacing: 0.16em; text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+        .worship-closed h3 {
+            font-weight: 800; font-size: 1.5rem; color: var(--dark);
+            letter-spacing: -0.01em; word-break: keep-all;
+            margin-bottom: 12px;
+        }
+        .worship-closed p {
+            color: #5d716b; font-size: 0.95rem; line-height: 1.6;
+            word-break: keep-all; text-wrap: balance; max-width: 34ch;
+        }
+        .worship-closed .wc-accent { color: var(--coral); font-weight: 700; }
         /* ─── FAQ 카테고리 칩 ─── */
         .faq-chip {
             display: inline-flex;
@@ -563,7 +728,7 @@
         .hamburger.open span:nth-child(2) { opacity: 0; }
         .hamburger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
 
-        /* ─── 플로팅 이동 버튼 ─── */
+        /* ─── 플로팅 이동 버튼 (우측 하단 카드형) ─── */
         .float-cta-wrap {
             position: fixed;
             left: 0; right: 0;
@@ -576,80 +741,120 @@
         }
         .float-cta {
             pointer-events: auto;
+            position: relative;
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            padding: 9px 10px 9px 11px;
-            border-radius: 999px;
-            background: linear-gradient(135deg, #34a07a 0%, #2F8F6B 45%, #3BA7A0 100%);
+            gap: 13px;
+            padding: 10px 8px 10px 11px;
+            border-radius: 17px;
+            background: linear-gradient(150deg, #1c4034 0%, #14332A 60%, #102a22 100%);
             color: #fff;
-            box-shadow: 0 10px 30px rgba(47,143,107,0.42), 0 2px 6px rgba(20,51,42,0.18);
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 18px 40px rgba(10,30,24,0.40), 0 4px 10px rgba(10,30,24,0.26), inset 0 1px 0 rgba(255,255,255,0.10);
             text-decoration: none;
             cursor: pointer;
             opacity: 0;
-            transform: translateY(160%);
-            transition: transform 0.5s cubic-bezier(0.34, 1.4, 0.64, 1), opacity 0.4s ease, box-shadow 0.25s ease;
-            max-width: 100%;
+            transform: translateY(170%) scale(0.96);
+            transition: transform 0.55s cubic-bezier(0.34, 1.45, 0.5, 1), opacity 0.4s ease, box-shadow 0.25s ease;
         }
         .float-cta.show {
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
             opacity: 1;
         }
         .float-cta:hover {
-            box-shadow: 0 16px 40px rgba(47,143,107,0.5), 0 3px 8px rgba(20,51,42,0.22);
+            box-shadow: 0 22px 50px rgba(10,30,24,0.48), 0 5px 12px rgba(10,30,24,0.30), inset 0 1px 0 rgba(255,255,255,0.14);
+            transform: translateY(-3px) scale(1);
         }
         .float-cta .fc-icon {
             flex-shrink: 0;
-            width: 36px; height: 36px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.22);
+            width: 40px; height: 40px;
+            border-radius: 12px;
+            background: linear-gradient(140deg, #c7efd5 0%, var(--yellow) 45%, #7fcd9c 100%);
+            color: #16352b;
             display: flex; align-items: center; justify-content: center;
-            font-size: 1.05rem; line-height: 1;
+            line-height: 1;
+            box-shadow: 0 4px 10px rgba(20,51,42,0.28), inset 0 1px 0 rgba(255,255,255,0.5);
         }
         .float-cta .fc-body {
             display: flex;
             flex-direction: column;
-            line-height: 1.1;
-            padding-right: 2px;
+            gap: 3px;
+            line-height: 1.05;
         }
         .float-cta .fc-eyebrow {
-            font-size: 0.6rem;
-            font-weight: 700;
-            letter-spacing: 0.14em;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.56rem;
+            font-weight: 800;
+            letter-spacing: 0.18em;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.78);
-            margin-bottom: 2px;
+            color: #a7e0bd;
+        }
+        .float-cta .fc-dot {
+            position: relative;
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: #ff6b5b;
+        }
+        .float-cta .fc-dot::after {
+            content: "";
+            position: absolute; inset: 0;
+            border-radius: 50%;
+            box-shadow: 0 0 0 0 rgba(255,107,91,0.6);
+            animation: fcPulse 1.9s ease-out infinite;
+        }
+        @keyframes fcPulse {
+            0%   { box-shadow: 0 0 0 0 rgba(255,107,91,0.55); }
+            70%  { box-shadow: 0 0 0 6px rgba(255,107,91,0); }
+            100% { box-shadow: 0 0 0 0 rgba(255,107,91,0); }
         }
         .float-cta .fc-text {
-            font-size: 0.86rem;
+            font-size: 0.96rem;
             font-weight: 800;
-            letter-spacing: 0.01em;
+            letter-spacing: -0.01em;
             white-space: nowrap;
         }
-        .float-cta .fc-div {
+        .float-cta .fc-go {
             flex-shrink: 0;
-            width: 1px;
-            align-self: stretch;
-            margin: 6px 2px;
-            background: rgba(255,255,255,0.28);
+            width: 30px; height: 30px;
+            margin-left: 4px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.10);
+            color: #cdeedb;
+            display: flex; align-items: center; justify-content: center;
+            transition: transform 0.25s ease, background 0.2s ease;
         }
+        .float-cta:hover .fc-go { background: rgba(255,255,255,0.18); transform: translateX(2px); }
         .float-cta .fc-close {
             flex-shrink: 0;
-            width: 26px; height: 26px;
+            width: 22px; height: 22px;
+            margin: 0 2px 0 1px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.16);
+            color: rgba(255,255,255,0.40);
             display: flex; align-items: center; justify-content: center;
-            font-size: 1rem; line-height: 1;
-            margin-left: 2px;
-            transition: background 0.2s;
+            font-size: 0.95rem; line-height: 1;
+            transition: color 0.2s, background 0.2s;
         }
-        .float-cta .fc-close:hover { background: rgba(255,255,255,0.34); }
+        .float-cta .fc-close:hover { color: #fff; background: rgba(255,255,255,0.12); }
         @media (max-width: 640px) {
-            .float-cta-wrap { bottom: 18px; }
-            .float-cta { gap: 10px; }
-            .float-cta .fc-icon { width: 32px; height: 32px; }
-            .float-cta .fc-text { font-size: 0.8rem; }
-            .float-cta .fc-eyebrow { font-size: 0.55rem; }
+            .float-cta-wrap {
+                padding: 0 14px;
+                bottom: 16px;
+            }
+            .float-cta {
+                gap: 9px;
+                padding: 7px 6px 7px 8px;
+                border-radius: 14px;
+            }
+            .float-cta .fc-icon { width: 32px; height: 32px; border-radius: 10px; }
+            .float-cta .fc-icon svg { width: 18px; height: 18px; }
+            .float-cta .fc-body { gap: 2px; }
+            .float-cta .fc-eyebrow { font-size: 0.5rem; letter-spacing: 0.12em; gap: 5px; }
+            .float-cta .fc-dot { width: 5px; height: 5px; }
+            .float-cta .fc-text { font-size: 0.84rem; }
+            .float-cta .fc-go { width: 26px; height: 26px; margin-left: 2px; }
+            .float-cta .fc-go svg { width: 14px; height: 14px; }
         }
 
         /* ─── 비디오 슬라이드 ─── */
@@ -1302,32 +1507,32 @@
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
             <div class="card-hover">
-                <div class="img-placeholder kit-card aspect-[4/5] mb-4 relative">
-                    <span class="text-xs">Coming Soon</span>
+                <div class="kit-card aspect-[4/5] mb-4 relative">
+                    <img src="assets/images/goods/tshirt.png" alt="단체 티셔츠" loading="lazy" class="w-full h-full object-cover">
                 </div>
                 <h4 class="font-bold text-gray-900 mb-1">티셔츠</h4>
-                <p class="text-xs text-gray-400">수련회 현장에서 배부 예정</p>
+                <p class="text-xs text-gray-400 kit-desc">수련회의 시작! 단체 티셔츠</p>
             </div>
             <div class="card-hover">
-                <div class="img-placeholder kit-card aspect-[4/5] mb-4 relative">
-                    <span class="text-xs">Coming Soon</span>
+                <div class="kit-card aspect-[4/5] mb-4 relative">
+                    <img src="assets/images/goods/sticker.jpeg" alt="스티커팩" loading="lazy" class="w-full h-full object-cover">
                 </div>
-                <h4 class="font-bold text-gray-900 mb-1">굿즈 1</h4>
-                <p class="text-xs text-gray-400">추후 공개 예정</p>
+                <h4 class="font-bold text-gray-900 mb-1">스티커</h4>
+                <p class="text-xs text-gray-400 kit-desc">손으로 그린 귀여운 스티커팩 12종</p>
             </div>
             <div class="card-hover">
-                <div class="img-placeholder kit-card aspect-[4/5] mb-4 relative">
-                    <span class="text-xs">Coming Soon</span>
+                <div class="kit-card aspect-[4/5] mb-4 relative">
+                    <img src="assets/images/goods/keycap.png" alt="키캡 키링" loading="lazy" class="w-full h-full object-cover">
                 </div>
-                <h4 class="font-bold text-gray-900 mb-1">굿즈 2</h4>
-                <p class="text-xs text-gray-400">추후 공개 예정</p>
+                <h4 class="font-bold text-gray-900 mb-1">키캡 키링</h4>
+                <p class="text-xs text-gray-400 kit-desc">RESET이 필요할 때? 딸깍</p>
             </div>
             <div class="card-hover">
-                <div class="img-placeholder kit-card aspect-[4/5] mb-4 relative">
-                    <span class="text-xs">Coming Soon</span>
+                <div class="kit-card aspect-[4/5] mb-4 relative">
+                    <img src="assets/images/goods/bottle.png" alt="물병" loading="lazy" class="w-full h-full object-cover">
                 </div>
-                <h4 class="font-bold text-gray-900 mb-1">굿즈 3</h4>
-                <p class="text-xs text-gray-400">추후 공개 예정</p>
+                <h4 class="font-bold text-gray-900 mb-1">물병</h4>
+                <p class="text-xs text-gray-400 kit-desc">차갑거나 뜨겁거나 다 담는 물병</p>
             </div>
         </div>
     </div>
@@ -1351,7 +1556,7 @@
                     <span>지금까지 <strong id="worshipCountNum">0</strong>명이 추천곡을 보내 주셨어요</span>
                 </div>
                 <p class="text-gray-600 text-base md:text-lg leading-relaxed mb-7" style="word-break:keep-all;">
-                    수련회 중 함께 부르고 싶은 찬양과 그 곡을 추천하는 이유를 보내 주세요. 남겨 주신 사연은 찬양의 밤 선곡과 나눔 준비에 참고됩니다.
+                    추천곡과 사연 신청이 마감되었습니다. 보내 주신 찬양과 사연은 찬양의 밤 선곡과 나눔 준비에 소중히 사용됩니다. 함께 준비한 찬양의 밤에서 만나요.
                 </p>
 
                 <div class="space-y-3">
@@ -1379,47 +1584,24 @@
                         </div>
                         <div>
                             <h4 class="font-bold text-gray-900 text-sm mb-1">운영 방식</h4>
-                            <p class="text-xs text-gray-600 leading-relaxed">제출된 내용은 담당팀이 확인하며, 사연 소개 여부는 현장 흐름에 맞춰 조정됩니다.</p>
+                            <p class="text-xs text-gray-600 leading-relaxed" style="word-break:keep-all;">제출된 내용은 담당팀이 확인하며, 사연 소개 여부는 현장 흐름에 맞춰 조정됩니다.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div>
-                <form id="worshipForm" class="worship-panel p-6 md:p-8 space-y-5 max-w-2xl ml-auto">
-                    <!-- 스팸 방지용 허니팟 (사람에겐 안 보임) -->
-                    <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
-                    <div>
-                        <label for="worshipName" class="worship-label">이름 또는 닉네임 <span class="text-gray-400 font-bold">(선택)</span></label>
-                        <input id="worshipName" class="worship-field" type="text" autocomplete="name" placeholder="예: 홍길동">
+                <div class="worship-panel worship-closed p-8 md:p-12 max-w-2xl ml-auto">
+                    <div class="worship-closed-icon">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
                     </div>
-                    <div>
-                        <label for="songTitle" class="worship-label">추천 찬양 <span style="color:var(--coral);">*</span></label>
-                        <input id="songTitle" class="worship-field" type="text" required placeholder="예: 주 이름 찬양">
-                    </div>
-                    <div>
-                        <label for="songArtist" class="worship-label">아티스트 / 버전 <span class="text-gray-400 font-bold">(선택)</span></label>
-                        <input id="songArtist" class="worship-field" type="text" placeholder="예: 마커스워십, 어노인팅, 원곡 등">
-                    </div>
-                    <div>
-                        <span class="worship-label">추천 이유의 방향</span>
-                        <div class="flex flex-wrap gap-2">
-                            <label class="worship-chip"><input type="radio" name="songMood" value="회복" checked> 회복</label>
-                            <label class="worship-chip"><input type="radio" name="songMood" value="감사"> 감사</label>
-                            <label class="worship-chip"><input type="radio" name="songMood" value="결단"> 결단</label>
-                            <label class="worship-chip"><input type="radio" name="songMood" value="위로"> 위로</label>
-                        </div>
-                    </div>
-                    <div>
-                        <label for="songStory" class="worship-label">사연 <span style="color:var(--coral);">*</span></label>
-                        <textarea id="songStory" class="worship-field min-h-[132px] resize-y" required maxlength="420" placeholder="이 찬양을 함께 부르고 싶은 이유를 적어 주세요."></textarea>
-                        <p class="mt-2 text-[11px] text-gray-400 text-right"><span id="storyCount">0</span>/420</p>
-                    </div>
-                    <button type="submit" class="worship-submit">추천곡 제출하기</button>
-                    <p id="worshipStatus" class="text-xs text-gray-500 leading-relaxed" aria-live="polite">
-                        제출해 주신 내용은 찬양의 밤 준비팀이 확인합니다.
+                    <span class="worship-closed-badge">신청 마감</span>
+                    <h3>추천곡·사연 신청이<br>마감되었어요</h3>
+                    <p>
+                        참여해주셔서 감사드립니다.<br>
+                        이제 곧, <span class="wc-accent">찬양의 밤에서 만나요</span> 🎶
                     </p>
-                </form>
+                </div>
             </div>
         </div>
     </div>
@@ -1862,21 +2044,36 @@
      플로팅 이동 버튼 (찬양의 밤)
 ───────────────────────────────────────── -->
 <div class="float-cta-wrap">
-    <a id="floatCta" class="float-cta" href="#worship-night" aria-label="찬양의 밤 사연과 추천곡 섹션으로 이동">
+    <a id="floatCta" class="float-cta" href="#kit" aria-label="2026 플캠 굿즈 섹션으로 이동">
         <span class="fc-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M9 18V5l11-2v13"></path>
-                <circle cx="6" cy="18" r="3"></circle>
-                <circle cx="20" cy="16" r="3"></circle>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="8" width="18" height="4" rx="1"></rect>
+                <path d="M12 8v13"></path>
+                <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"></path>
+                <path d="M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"></path>
             </svg>
         </span>
         <span class="fc-body">
-            <span class="fc-eyebrow">Praise Night</span>
-            <span class="fc-text">사연·추천곡 보내기</span>
+            <span class="fc-eyebrow"><span class="fc-dot" aria-hidden="true"></span>New Drop</span>
+            <span class="fc-text">굿즈 공개!</span>
         </span>
-        <span class="fc-div" aria-hidden="true"></span>
-        <span class="fc-close" id="floatCtaClose" role="button" tabindex="0" aria-label="닫기">×</span>
+        <span class="fc-go" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </span>
     </a>
+</div>
+
+<!-- ─────────────────────────────────────────
+     굿즈 라이트박스
+───────────────────────────────────────── -->
+<div id="kitLightbox" class="kit-lightbox" role="dialog" aria-modal="true" aria-label="굿즈 이미지 크게 보기">
+    <div class="kit-lb-track" id="kitLbTrack"></div>
+    <button class="kit-lightbox-nav prev" id="kitLightboxPrev" aria-label="이전 굿즈">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    </button>
+    <button class="kit-lightbox-nav next" id="kitLightboxNext" aria-label="다음 굿즈">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    </button>
 </div>
 
 <script>
@@ -2008,19 +2205,16 @@ document.querySelectorAll('.menu-link').forEach(link => {
     });
 });
 
-// ── 찬양의 밤 추천 폼 ──
+// ── 찬양의 밤 추천 폼 (신청 마감) ──
+// 신청이 마감되어 제출 폼은 비활성화되었습니다. 신청 건수 배지는 그대로 노출합니다.
 const worshipForm = document.getElementById('worshipForm');
-const worshipStatus = document.getElementById('worshipStatus');
-const storyField = document.getElementById('songStory');
-const storyCount = document.getElementById('storyCount');
-const worshipSubmit = worshipForm.querySelector('.worship-submit');
 const worshipCountBadge = document.getElementById('worshipCountBadge');
 const worshipCountNum = document.getElementById('worshipCountNum');
 
 // 현재 추천곡 신청 건수를 불러와 배지에 표시 (실패하면 조용히 숨김 유지)
 let worshipCount = null;
 function renderWorshipCount() {
-    if (worshipCount === null || worshipCount <= 0) return;
+    if (!worshipCountBadge || worshipCount === null || worshipCount <= 0) return;
     worshipCountNum.textContent = worshipCount;
     worshipCountBadge.hidden = false;
 }
@@ -2035,56 +2229,6 @@ function renderWorshipCount() {
         }
     } catch { /* 집계 실패 시 배지는 표시하지 않음 */ }
 })();
-
-storyField.addEventListener('input', () => {
-    storyCount.textContent = storyField.value.length;
-});
-
-worshipForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    const songTitle = document.getElementById('songTitle').value.trim();
-    const story = storyField.value.trim();
-
-    if (!songTitle || !story) {
-        worshipStatus.textContent = '추천 찬양과 사연을 모두 입력해 주세요.';
-        return;
-    }
-
-    const payload = {
-        name: document.getElementById('worshipName').value.trim(),
-        songTitle,
-        songArtist: document.getElementById('songArtist').value.trim(),
-        songMood: (worshipForm.querySelector('input[name="songMood"]:checked') || {}).value || '',
-        story,
-        website: (worshipForm.querySelector('input[name="website"]') || {}).value || '',
-    };
-
-    const originalLabel = worshipSubmit.textContent;
-    worshipSubmit.disabled = true;
-    worshipSubmit.textContent = '전송 중...';
-    worshipStatus.textContent = '';
-
-    try {
-        const res = await fetch('/api/worship-request', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload),
-        });
-        if (!res.ok) throw new Error('request failed');
-
-        worshipForm.reset();
-        storyCount.textContent = '0';
-        worshipStatus.textContent = '추천곡과 사연이 제출되었습니다. 함께 나눌 찬양을 준비할 때 참고하겠습니다.';
-        // 방금 제출분을 즉시 반영 (다음 로드 때 서버 값으로 정정됨)
-        worshipCount = (worshipCount || 0) + 1;
-        renderWorshipCount();
-    } catch (err) {
-        worshipStatus.textContent = '전송에 실패했습니다. 잠시 후 다시 시도해 주세요.';
-    } finally {
-        worshipSubmit.disabled = false;
-        worshipSubmit.textContent = originalLabel;
-    }
-});
 
 // ── 비디오 슬라이더 ──
 const track   = document.getElementById('sliderTrack');
@@ -2120,40 +2264,148 @@ function showDay(dayIdx) {
     trackEvent('schedule_day_view', { day: dayIdx });
 }
 
-// ── 플로팅 이동 버튼 (찬양의 밤) ──
+// ── 플로팅 이동 버튼 (굿즈 공개) ──
 (function () {
-    const fab    = document.getElementById('floatCta');
-    const fabX   = document.getElementById('floatCtaClose');
-    const target = document.getElementById('worship-night');
-    if (!fab || !target) return;
+    const fab  = document.getElementById('floatCta');
+    const hero = document.querySelector('.hero-section');
+    if (!fab || !hero) return;
 
-    let dismissed = false;
-    const showFab = () => { if (!dismissed) fab.classList.add('show'); };
+    const showFab = () => fab.classList.add('show');
     const hideFab = () => fab.classList.remove('show');
 
     // 진입 후 잠깐 뒤 등장
     setTimeout(showFab, 900);
 
-    // 버튼 클릭 → 섹션으로 이동 (앵커 스무스 스크롤) 후 숨김
+    // 버튼 클릭 → 굿즈 섹션으로 이동 후 숨김
     fab.addEventListener('click', () => {
-        trackEvent('float_cta_click', { target: 'worship-night' });
+        trackEvent('float_cta_click', { target: 'kit' });
         hideFab();
     });
 
-    // 닫기 버튼 (앵커 이동 차단)
-    function dismiss(e) { e.preventDefault(); e.stopPropagation(); dismissed = true; hideFab(); }
-    fabX.addEventListener('click', dismiss);
-    fabX.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') dismiss(e);
-    });
-
-    // 찬양의 밤 섹션이 보이면 자동으로 숨김 / 벗어나면 다시 표시
+    // 첫 화면(히어로)이 보일 때만 표시, 스크롤 내려 벗어나면 숨김
     if ('IntersectionObserver' in window) {
         const io = new IntersectionObserver(entries => {
-            entries.forEach(en => en.isIntersecting ? hideFab() : showFab());
-        }, { threshold: 0.35 });
-        io.observe(target);
+            entries.forEach(en => en.isIntersecting ? showFab() : hideFab());
+        }, { threshold: 0.15 });
+        io.observe(hero);
     }
+})();
+
+// ── 굿즈 이미지 라이트박스 (카드 캐러셀) ──
+(function () {
+    const lb = document.getElementById('kitLightbox');
+    if (!lb) return;
+    const track = document.getElementById('kitLbTrack');
+    const btnPrev = document.getElementById('kitLightboxPrev');
+    const btnNext = document.getElementById('kitLightboxNext');
+
+    const esc = s => (s || '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+    // 굿즈 데이터 수집
+    const items = Array.from(document.querySelectorAll('#kit .card-hover')).map(card => {
+        const img = card.querySelector('img');
+        return {
+            src:   img ? (img.currentSrc || img.src) : '',
+            alt:   img ? img.alt : '',
+            title: card.querySelector('h4')?.textContent.trim() || '',
+            desc:  card.querySelector('.kit-desc')?.textContent.trim() || ''
+        };
+    });
+    const total = items.length;
+
+    // 슬라이드(카드) 생성
+    track.innerHTML = items.map((it, i) => `
+        <div class="kit-lb-slide">
+            <div class="kit-lb-card">
+                <div class="kit-lightbox-media">
+                    <img src="${esc(it.src)}" alt="${esc(it.alt || it.title)}" draggable="false">
+                    <span class="kit-lightbox-counter"><b>${i + 1}</b> / ${total}</span>
+                </div>
+                <div class="kit-lightbox-cap">
+                    <span class="lb-eyebrow">2026 Goods</span>
+                    <div class="lb-title">${esc(it.title)}</div>
+                    <div class="lb-desc">${esc(it.desc)}</div>
+                </div>
+            </div>
+        </div>`).join('');
+
+    let cur = 0;
+    const setX = (px, animate) => {
+        track.style.transition = animate ? '' : 'none';
+        track.style.transform = `translateX(calc(${-cur * 100}% + ${px}px))`;
+    };
+    function updateArrows() {
+        btnPrev.hidden = (cur === 0);
+        btnNext.hidden = (cur === total - 1);
+    }
+    function render(animate = true) { setX(0, animate); updateArrows(); }
+    function go(dir) {
+        const next = cur + dir;
+        if (next < 0 || next >= total) { render(true); return; }  // 양끝에서 멈춤
+        cur = next;
+        render(true);
+        trackEvent('kit_image_view', { item: items[cur].title });
+    }
+    function open(i) {
+        cur = i;
+        render(false);
+        lb.classList.add('show');
+        document.body.style.overflow = 'hidden';
+        trackEvent('kit_image_view', { item: items[i].title });
+    }
+    function close() {
+        lb.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('#kit .card-hover').forEach((card, i) => {
+        const img = card.querySelector('img');
+        if (img) img.addEventListener('click', () => open(i));
+    });
+    btnPrev.addEventListener('click', () => go(-1));
+    btnNext.addEventListener('click', () => go(1));
+    lb.addEventListener('click', e => {
+        if (e.target === lb || e.target === track || e.target.classList.contains('kit-lb-slide')) close();
+    });
+    document.addEventListener('keydown', e => {
+        if (!lb.classList.contains('show')) return;
+        if (e.key === 'Escape')     close();
+        if (e.key === 'ArrowLeft')  go(-1);
+        if (e.key === 'ArrowRight') go(1);
+    });
+
+    // ── 터치 스와이프 (카드 드래그) ──
+    let startX = 0, startY = 0, dx = 0, swiping = false, locked = false;
+    const THRESHOLD = 50;
+
+    track.addEventListener('touchstart', e => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        dx = 0; swiping = true; locked = false;
+    }, { passive: true });
+
+    track.addEventListener('touchmove', e => {
+        if (!swiping) return;
+        dx = e.touches[0].clientX - startX;
+        const dy = e.touches[0].clientY - startY;
+        if (!locked) {
+            if (Math.abs(dy) > Math.abs(dx)) { swiping = false; return; }  // 세로 스크롤
+            locked = true;
+        }
+        // 양끝 저항감
+        if ((cur === 0 && dx > 0) || (cur === total - 1 && dx < 0)) dx *= 0.32;
+        setX(dx, false);
+    }, { passive: true });
+
+    function endSwipe() {
+        if (!swiping) return;
+        swiping = false;
+        if (dx <= -THRESHOLD)      go(1);
+        else if (dx >= THRESHOLD)  go(-1);
+        else                       render(true);
+    }
+    track.addEventListener('touchend', endSwipe);
+    track.addEventListener('touchcancel', endSwipe);
 })();
 
 </script>
