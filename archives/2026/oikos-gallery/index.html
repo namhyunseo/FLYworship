@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oikos share · 2026 FLY 수련회 사진</title>
+    <meta property="og:title" content="oikos share · 2026 FLY 수련회 사진">
+    <meta property="og:description" content="2026 FLY 수련회에서 함께 모은 사진 462장">
+    <meta property="og:image" content="https://res.cloudinary.com/wyom4ae9/image/upload/c_fill,w_1200,h_630,q_auto,f_auto/oikos-2026/worship/DAY3_003">
+    <meta property="og:url" content="https://flyworshipcamp.vercel.app/archives/2026/oikos-gallery/">
+    <meta property="og:type" content="website">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&family=Bebas+Neue&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://res.cloudinary.com">
+
+    <!-- ─── Google Analytics (GA4) — 홈과 동일 측정 ID ─── -->
+    <script>
+        const GA_MEASUREMENT_ID = 'G-17Z0NDZ34E';
+        if (GA_MEASUREMENT_ID && GA_MEASUREMENT_ID !== 'G-XXXXXXXXXX') {
+            const s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_MEASUREMENT_ID;
+            document.head.appendChild(s);
+        }
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', GA_MEASUREMENT_ID);
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f4fbf8;
+            color: #1a1a1a;
+            overflow-x: hidden;
+        }
+        :root {
+            --coral:  #2F8F6B;
+            --orange: #3BA7A0;
+            --dark:   #14332A;
+            --cream:  #F2FAF6;
+        }
+        .font-display { font-family: 'Bebas Neue', sans-serif; }
+        .font-heading { font-family: 'Oswald', sans-serif; }
+
+        /* ─── 마소너리: CSS 컬럼으로 가로세로 제각각 사진을 흐르게 ─── */
+        .masonry { column-count: 2; column-gap: 12px; }
+        @media (min-width: 640px)  { .masonry { column-count: 3; } }
+        @media (min-width: 1024px) { .masonry { column-count: 4; } }
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 12px;
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #e6f0ea;           /* 로드 전 자리표시 색 */
+            cursor: zoom-in;
+            position: relative;
+            display: block;
+        }
+        .masonry-item img {
+            width: 100%;
+            display: block;
+            opacity: 0;
+            transition: opacity .4s ease;
+        }
+        .masonry-item img.loaded { opacity: 1; }
+
+        /* ─── 라이트박스 ─── */
+        #lightbox {
+            position: fixed; inset: 0; z-index: 100;
+            background: rgba(10, 20, 16, .94);
+            display: none;
+            align-items: center; justify-content: center;
+        }
+        #lightbox.open { display: flex; }
+        #lightbox img {
+            max-width: 92vw; max-height: 86vh;
+            object-fit: contain; border-radius: 6px;
+            box-shadow: 0 10px 40px rgba(0,0,0,.5);
+        }
+        .lb-btn {
+            position: absolute; background: rgba(255,255,255,.12);
+            color: #fff; border: none; cursor: pointer;
+            width: 48px; height: 48px; border-radius: 999px;
+            font-size: 24px; line-height: 1; display: flex;
+            align-items: center; justify-content: center;
+            transition: background .2s;
+        }
+        .lb-btn:hover { background: rgba(255,255,255,.28); }
+        #lb-prev { left: 16px; top: 50%; transform: translateY(-50%); }
+        #lb-next { right: 16px; top: 50%; transform: translateY(-50%); }
+        #lb-close { right: 16px; top: 16px; }
+        #lb-counter {
+            position: absolute; bottom: 18px; left: 50%;
+            transform: translateX(-50%); color: #fff;
+            font-family: 'Oswald', sans-serif; letter-spacing: .05em;
+            font-size: 14px; background: rgba(0,0,0,.35);
+            padding: 4px 12px; border-radius: 999px;
+        }
+
+        /* ─── 필터 탭 ─── */
+        .day-tab {
+            font-family: 'Oswald', sans-serif; font-weight: 600;
+            letter-spacing: .04em; font-size: 14px;
+            padding: 8px 16px; border-radius: 999px;
+            border: 1.5px solid var(--coral); color: var(--coral);
+            background: transparent; cursor: pointer;
+            transition: all .18s; white-space: nowrap;
+        }
+        .day-tab:hover { background: rgba(47,143,107,.1); }
+        .day-tab.active { background: var(--coral); color: #fff; }
+    </style>
+</head>
+<body>
+    <!-- ─── 헤더 ─── -->
+    <header class="sticky top-0 z-40 backdrop-blur bg-[#f4fbf8]/85 border-b border-black/5">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+            <a href="/" class="flex items-center gap-2 text-[var(--dark)] hover:text-[var(--coral)] transition font-heading font-semibold text-sm">
+                <span class="text-lg leading-none">←</span> FLY Worship Camp
+            </a>
+            <span class="font-display text-2xl tracking-wide text-[var(--coral)]">OIKOS SHARE</span>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 pb-24">
+        <!-- ─── 타이틀 ─── -->
+        <section class="text-center pt-10 pb-6">
+            <p class="font-heading text-[var(--orange)] tracking-[0.2em] text-sm mb-2">2026 FLY WORSHIP CAMP</p>
+            <h1 class="font-display text-4xl sm:text-5xl text-[var(--dark)] tracking-wide">함께 모은 순간들</h1>
+            <p class="mt-3 text-gray-500 text-sm">수련회에서 우리가 나눈 <span id="total-count" class="font-semibold text-[var(--coral)]">462</span>장의 사진</p>
+        </section>
+
+        <!-- ─── day 필터 ─── -->
+        <nav id="filters" class="flex flex-wrap justify-center gap-2 mb-8"></nav>
+
+        <!-- ─── 갤러리 그리드 ─── -->
+        <div id="gallery" class="masonry"></div>
+        <p id="empty-msg" class="hidden text-center text-gray-400 py-16">이 날짜의 사진이 없습니다.</p>
+    </main>
+
+    <!-- ─── 라이트박스 ─── -->
+    <div id="lightbox" role="dialog" aria-modal="true" aria-label="사진 크게 보기">
+        <button id="lb-close" class="lb-btn" aria-label="닫기">✕</button>
+        <button id="lb-prev" class="lb-btn" aria-label="이전 사진">‹</button>
+        <img id="lb-img" alt="수련회 사진">
+        <button id="lb-next" class="lb-btn" aria-label="다음 사진">›</button>
+        <div id="lb-counter"></div>
+    </div>
+
+    <script>
+    (function () {
+        const CLOUD = 'wyom4ae9';
+        const base = 'https://res.cloudinary.com/' + CLOUD + '/image/upload/';
+        // 썸네일: 폭 500 · 자동 화질/포맷 / 원본(라이트박스): 폭 1600
+        const thumbURL = id => base + 'c_scale,w_500,q_auto,f_auto/' + id;
+        const fullURL  = id => base + 'c_limit,w_1600,q_auto,f_auto/' + id;
+
+        // day 필터 정의 (전체 + PRE·DAY1~3), 라벨은 한국어로
+        const DAYS = [
+            { key: 'ALL',  label: '전체' },
+            { key: 'PRE',  label: '사전' },
+            { key: 'DAY1', label: '1일차' },
+            { key: 'DAY2', label: '2일차' },
+            { key: 'DAY3', label: '3일차' },
+        ];
+
+        const galleryEl = document.getElementById('gallery');
+        const filtersEl = document.getElementById('filters');
+        const emptyMsg  = document.getElementById('empty-msg');
+
+        let photos = [];        // 전체 매니페스트
+        let current = [];       // 현재 필터로 보이는 목록 (라이트박스 이동 기준)
+        let activeDay = 'ALL';
+
+        // ── 화면 근처 온 썸네일만 로드 (462장이라 필수) ──
+        const io = new IntersectionObserver((entries, obs) => {
+            entries.forEach(e => {
+                if (!e.isIntersecting) return;
+                const img = e.target;
+                if (!img.dataset.src) return;
+                img.src = img.dataset.src;
+                img.onload = () => img.classList.add('loaded');
+                delete img.dataset.src;
+                obs.unobserve(img);
+            });
+        }, { rootMargin: '400px' });   // 뷰포트 400px 전에 미리 로드
+
+        // ── 그리드 렌더 ──
+        function render() {
+            galleryEl.innerHTML = '';
+            current = photos.filter(p => activeDay === 'ALL' || p.day === activeDay);
+            emptyMsg.classList.toggle('hidden', current.length > 0);
+
+            current.forEach((p, idx) => {
+                const item = document.createElement('a');
+                item.className = 'masonry-item';
+                item.href = 'javascript:void(0)';
+                item.setAttribute('aria-label', '사진 크게 보기');
+
+                const img = document.createElement('img');
+                img.style.aspectRatio = p.w + ' / ' + p.h;   // 자리 미리 확보 → 레이아웃 안 흔들림
+                img.dataset.src = thumbURL(p.id);
+                img.alt = '수련회 사진';
+                img.loading = 'lazy';
+
+                item.appendChild(img);
+                item.addEventListener('click', () => openLightbox(idx));
+                galleryEl.appendChild(item);
+                io.observe(img);
+            });
+        }
+
+        // ── 필터 탭 ──
+        function buildFilters() {
+            DAYS.forEach(d => {
+                const has = d.key === 'ALL' || photos.some(p => p.day === d.key);
+                if (!has) return;   // 해당 day 사진이 아예 없으면 탭 숨김
+                const btn = document.createElement('button');
+                btn.className = 'day-tab' + (d.key === 'ALL' ? ' active' : '');
+                btn.textContent = d.label;
+                btn.addEventListener('click', () => {
+                    activeDay = d.key;
+                    [...filtersEl.children].forEach(c => c.classList.remove('active'));
+                    btn.classList.add('active');
+                    if (typeof gtag === 'function') gtag('event', 'gallery_filter', { day: d.key });
+                    render();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+                filtersEl.appendChild(btn);
+            });
+        }
+
+        // ── 라이트박스 ──
+        const lb = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lb-img');
+        const lbCounter = document.getElementById('lb-counter');
+        let lbIndex = 0;
+
+        function showAt(i) {
+            lbIndex = (i + current.length) % current.length;   // 순환
+            const p = current[lbIndex];
+            lbImg.src = fullURL(p.id);
+            lbCounter.textContent = (lbIndex + 1) + ' / ' + current.length;
+        }
+        function openLightbox(i) {
+            showAt(i);
+            lb.classList.add('open');
+            document.body.style.overflow = 'hidden';
+            if (typeof gtag === 'function') gtag('event', 'gallery_open_photo', { id: current[lbIndex].id });
+        }
+        function closeLightbox() {
+            lb.classList.remove('open');
+            lbImg.src = '';
+            document.body.style.overflow = '';
+        }
+        document.getElementById('lb-close').addEventListener('click', closeLightbox);
+        document.getElementById('lb-prev').addEventListener('click', () => showAt(lbIndex - 1));
+        document.getElementById('lb-next').addEventListener('click', () => showAt(lbIndex + 1));
+        lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });  // 바깥 클릭 닫기
+        document.addEventListener('keydown', e => {
+            if (!lb.classList.contains('open')) return;
+            if (e.key === 'Escape') closeLightbox();
+            else if (e.key === 'ArrowLeft')  showAt(lbIndex - 1);
+            else if (e.key === 'ArrowRight') showAt(lbIndex + 1);
+        });
+
+        // ── 시작: 매니페스트 로드 ──
+        fetch('./photos.json')
+            .then(r => r.json())
+            .then(data => {
+                photos = data.photos || [];
+                document.getElementById('total-count').textContent = photos.length;
+                buildFilters();
+                render();
+            })
+            .catch(err => {
+                galleryEl.innerHTML = '<p class="text-center text-gray-400 py-16">사진을 불러오지 못했습니다.</p>';
+                console.error('photos.json 로드 실패', err);
+            });
+    })();
+    </script>
+</body>
+</html>

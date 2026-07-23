@@ -11,3 +11,7 @@ pnpm-debug.log*
 .DS_Store
 .claude/
 .vercel
+
+# oikos gallery tooling (not committed)
+.venv-tools/
+.oikos-download/
