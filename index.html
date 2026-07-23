@@ -506,20 +506,6 @@
             border-radius: 24px;
             box-shadow: 0 18px 48px rgba(20,51,42,0.08);
         }
-        .worship-count-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 14px;
-            border-radius: 999px;
-            background: rgba(47,143,107,0.10);
-            border: 1px solid rgba(47,143,107,0.20);
-            color: #2f8f6b;
-            font-size: 0.82rem;
-            font-weight: 700;
-        }
-        .worship-count-badge strong { font-weight: 900; }
-        .worship-count-badge[hidden] { display: none; }
         .worship-field {
             width: 100%;
             border: 1.5px solid rgba(47,143,107,0.18);
@@ -1595,10 +1581,6 @@
                     찬양의 밤<br>
                     <span style="color:var(--coral);">사연과 추천곡</span>
                 </h2>
-                <div id="worshipCountBadge" class="worship-count-badge mb-5" hidden>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-                    <span>지금까지 <strong id="worshipCountNum">0</strong>명이 추천곡을 보내 주셨어요</span>
-                </div>
                 <p class="text-gray-600 text-base md:text-lg leading-relaxed mb-7" style="word-break:keep-all;">
                     추천곡과 사연 신청이 마감되었습니다. 보내 주신 찬양과 사연은 찬양의 밤 선곡과 나눔 준비에 소중히 사용됩니다. 함께 준비한 찬양의 밤에서 만나요.
                 </p>
@@ -2253,31 +2235,6 @@ document.querySelectorAll('.menu-link').forEach(link => {
         hamburger.classList.remove('open');
     });
 });
-
-// ── 찬양의 밤 추천 폼 (신청 마감) ──
-// 신청이 마감되어 제출 폼은 비활성화되었습니다. 신청 건수 배지는 그대로 노출합니다.
-const worshipForm = document.getElementById('worshipForm');
-const worshipCountBadge = document.getElementById('worshipCountBadge');
-const worshipCountNum = document.getElementById('worshipCountNum');
-
-// 현재 추천곡 신청 건수를 불러와 배지에 표시 (실패하면 조용히 숨김 유지)
-let worshipCount = null;
-function renderWorshipCount() {
-    if (!worshipCountBadge || worshipCount === null || worshipCount <= 0) return;
-    worshipCountNum.textContent = worshipCount;
-    worshipCountBadge.hidden = false;
-}
-(async () => {
-    try {
-        const res = await fetch('/api/worship-count');
-        if (!res.ok) return;
-        const data = await res.json();
-        if (typeof data.count === 'number') {
-            worshipCount = data.count;
-            renderWorshipCount();
-        }
-    } catch { /* 집계 실패 시 배지는 표시하지 않음 */ }
-})();
 
 // ── 비디오 슬라이더 ──
 const track   = document.getElementById('sliderTrack');
